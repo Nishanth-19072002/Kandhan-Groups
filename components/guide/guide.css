@@ -1,0 +1,144 @@
+/* ───────── Guide Character choreography ─────────
+   All limb pivots are expressed in the SVG's view-box coordinates. */
+
+.guide { overflow: visible; }
+.guide g { transform-box: view-box; }
+
+.g-body   { transform-origin: 110px 360px; }
+.g-head   { transform-origin: 110px 100px; transition: transform .4s ease; }
+.g-eyes   { transform-origin: 110px 74px; animation: g-blink 4.6s infinite; }
+.g-arm-l  { transform-origin: 76px 120px;  transform: rotate(8deg);  transition: transform .45s cubic-bezier(.34,1.4,.5,1); }
+.g-fore-l { transform-origin: 76px 170px;  transform: rotate(-6deg); transition: transform .45s cubic-bezier(.34,1.4,.5,1); }
+.g-arm-r  { transform-origin: 144px 120px; transform: rotate(-8deg); transition: transform .45s cubic-bezier(.34,1.4,.5,1); }
+.g-fore-r { transform-origin: 144px 170px; transform: rotate(6deg);  transition: transform .45s cubic-bezier(.34,1.4,.5,1); }
+.g-leg-l  { transform-origin: 95px 218px;  transition: transform .35s ease; }
+.g-shin-l { transform-origin: 95px 282px;  transition: transform .35s ease; }
+.g-leg-r  { transform-origin: 125px 218px; transition: transform .35s ease; }
+.g-shin-r { transform-origin: 125px 282px; transition: transform .35s ease; }
+.g-rope   { opacity: 0; transition: opacity .3s ease; }
+.g-thumb  { opacity: 0; transition: opacity .3s ease; }
+.g-shadow { transform-box: fill-box; transform-origin: center; }
+
+@keyframes g-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+
+/* ── IDLE ── */
+.pose-idle .g-body { animation: g-breathe 3.6s ease-in-out infinite; }
+.pose-idle .g-arm-l { animation: g-sway-l 3.6s ease-in-out infinite; }
+.pose-idle .g-arm-r { animation: g-sway-r 3.6s ease-in-out infinite; }
+@keyframes g-breathe { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes g-sway-l { 0%,100% { transform: rotate(8deg); } 50% { transform: rotate(4deg); } }
+@keyframes g-sway-r { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(-4deg); } }
+
+/* ── WALK ── */
+.pose-walk .g-body   { animation: g-bob .36s ease-in-out infinite; }
+.pose-walk .g-leg-l  { animation: g-leg-a .72s ease-in-out infinite; }
+.pose-walk .g-leg-r  { animation: g-leg-b .72s ease-in-out infinite; }
+.pose-walk .g-shin-l { animation: g-shin-a .72s ease-in-out infinite; }
+.pose-walk .g-shin-r { animation: g-shin-b .72s ease-in-out infinite; }
+.pose-walk .g-arm-l  { animation: g-arm-swing-a .72s ease-in-out infinite; }
+.pose-walk .g-arm-r  { animation: g-arm-swing-b .72s ease-in-out infinite; }
+.pose-walk .g-shadow { animation: g-shadow .36s ease-in-out infinite; }
+@keyframes g-bob { 0%,100% { transform: translateY(0) rotate(1.5deg); } 50% { transform: translateY(-7px) rotate(1.5deg); } }
+@keyframes g-leg-a { 0%,100% { transform: rotate(14deg); } 50% { transform: rotate(-12deg); } }
+@keyframes g-leg-b { 0%,100% { transform: rotate(-12deg); } 50% { transform: rotate(14deg); } }
+@keyframes g-shin-a { 0%,100% { transform: rotate(0deg); } 25% { transform: rotate(-16deg); } 50%,75% { transform: rotate(0deg); } }
+@keyframes g-shin-b { 0%,50% { transform: rotate(0deg); } 75% { transform: rotate(16deg); } 100% { transform: rotate(0deg); } }
+@keyframes g-arm-swing-a { 0%,100% { transform: rotate(-10deg); } 50% { transform: rotate(24deg); } }
+@keyframes g-arm-swing-b { 0%,100% { transform: rotate(-24deg); } 50% { transform: rotate(10deg); } }
+@keyframes g-shadow { 0%,100% { transform: scaleX(1); opacity: .35; } 50% { transform: scaleX(.85); opacity: .25; } }
+
+/* ── WAVE ── */
+.pose-wave .g-arm-r  { transform: rotate(-140deg); }
+.pose-wave .g-fore-r { animation: g-wave .5s ease-in-out infinite alternate; }
+.pose-wave .g-head   { transform: rotate(-6deg); }
+.pose-wave .g-body   { animation: g-breathe 2.4s ease-in-out infinite; }
+@keyframes g-wave { from { transform: rotate(-28deg); } to { transform: rotate(22deg); } }
+
+/* ── POINT / PRESENT ── */
+.pose-point .g-arm-r  { transform: rotate(-86deg); animation: g-point 2.2s ease-in-out infinite; }
+.pose-point .g-fore-r { transform: rotate(-10deg); }
+.pose-point .g-arm-l  { transform: rotate(28deg); }
+.pose-point .g-fore-l { transform: rotate(-35deg); }
+.pose-point .g-head   { transform: rotate(6deg); }
+.pose-point .g-body   { animation: g-breathe 3s ease-in-out infinite; }
+@keyframes g-point { 0%,100% { transform: rotate(-86deg); } 50% { transform: rotate(-94deg); } }
+
+/* ── THUMBS UP ── */
+.pose-thumbs .g-arm-r  { transform: rotate(-25deg); }
+.pose-thumbs .g-fore-r { transform: rotate(-115deg); }
+.pose-thumbs .g-thumb  { opacity: 1; }
+.pose-thumbs .g-head   { transform: rotate(-6deg); }
+.pose-thumbs .g-body   { animation: g-hop .9s ease-in-out 2; }
+@keyframes g-hop { 0%,100% { transform: translateY(0); } 40% { transform: translateY(-14px); } }
+
+/* ── PULL (Realistic Hand-Over-Hand Heavy Rope Pulling) ── */
+.pose-pull .g-rope   { opacity: 1; }
+.pose-pull .g-rope-line { animation: g-rope-slide 0.8s linear infinite; }
+.pose-pull .g-arm-r  { animation: g-pull-arm-r 0.8s ease-in-out infinite; }
+.pose-pull .g-fore-r { animation: g-pull-fore-r 0.8s ease-in-out infinite; }
+.pose-pull .g-arm-l  { animation: g-pull-arm-l 0.8s ease-in-out infinite; }
+.pose-pull .g-fore-l { animation: g-pull-fore-l 0.8s ease-in-out infinite; }
+.pose-pull .g-body   { animation: g-pull-squat 0.8s ease-in-out infinite; }
+.pose-pull .g-head   { animation: g-pull-head 0.8s ease-in-out infinite; }
+.pose-pull .g-leg-l  { animation: g-pull-knee-l 0.8s ease-in-out infinite; }
+.pose-pull .g-leg-r  { animation: g-pull-knee-r 0.8s ease-in-out infinite; }
+
+/* Cable sliding downward */
+@keyframes g-rope-slide {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: 40; }
+}
+
+/* Right arm reaches high (0%), grips and pulls hard downward to waist (50%), then resets */
+@keyframes g-pull-arm-r {
+  0%   { transform: rotate(-135deg); }
+  45%  { transform: rotate(-10deg); }
+  55%  { transform: rotate(-5deg); }
+  85%  { transform: rotate(-110deg); }
+  100% { transform: rotate(-135deg); }
+}
+@keyframes g-pull-fore-r {
+  0%   { transform: rotate(35deg); }
+  45%  { transform: rotate(-95deg); }
+  55%  { transform: rotate(-85deg); }
+  85%  { transform: rotate(-10deg); }
+  100% { transform: rotate(35deg); }
+}
+
+/* Left arm reaches high at 50%, pulls hard down to waist at 100% (counter-phase hand-over-hand) */
+@keyframes g-pull-arm-l {
+  0%   { transform: rotate(-15deg); }
+  15%  { transform: rotate(-110deg); }
+  45%  { transform: rotate(-140deg); }
+  85%  { transform: rotate(-20deg); }
+  100% { transform: rotate(-15deg); }
+}
+@keyframes g-pull-fore-l {
+  0%   { transform: rotate(-95deg); }
+  15%  { transform: rotate(-15deg); }
+  45%  { transform: rotate(35deg); }
+  85%  { transform: rotate(-95deg); }
+  100% { transform: rotate(-95deg); }
+}
+
+/* Torso drops with effort twice per cycle (each time a hand pulls down) */
+@keyframes g-pull-squat {
+  0%, 50%, 100% { transform: translateY(0); }
+  25%, 75%      { transform: translateY(8px); }
+}
+@keyframes g-pull-head {
+  0%, 50%, 100% { transform: rotate(-4deg); }
+  25%, 75%      { transform: rotate(5deg); }
+}
+@keyframes g-pull-knee-l {
+  0%, 50%, 100% { transform: rotate(4deg); }
+  25%, 75%      { transform: rotate(12deg); }
+}
+@keyframes g-pull-knee-r {
+  0%, 50%, 100% { transform: rotate(-4deg); }
+  25%, 75%      { transform: rotate(-12deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide * { animation: none !important; }
+}
