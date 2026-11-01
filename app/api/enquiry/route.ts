@@ -97,6 +97,49 @@ async function sendWhatsAppTo(phone: string, apikey: string, d: Enquiry) {
   if (!res.ok) throw new Error(`CallMeBot HTTP ${res.status} for ${phone}`);
 }
 
+/* Send instant Telegram alert to both phones / chat IDs */
+async function sendTelegramAlert(d: Enquiry) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  if (!token) return false;
+
+  const chatIds: string[] = [];
+  if (process.env.TELEGRAM_CHAT_ID) {
+    chatIds.push(...process.env.TELEGRAM_CHAT_ID.split(",").map((s) => s.trim()));
+  }
+  if (process.env.TELEGRAM_CHAT_ID_1) chatIds.push(process.env.TELEGRAM_CHAT_ID_1.trim());
+  if (process.env.TELEGRAM_CHAT_ID_2) chatIds.push(process.env.TELEGRAM_CHAT_ID_2.trim());
+
+  const uniqueChats = Array.from(new Set(chatIds.filter(Boolean)));
+  if (uniqueChats.length === 0) return false;
+
+  const text =
+    `🏗️ *New Project Enquiry – ${siteConfig.name}*\n\n` +
+    `👤 *Client Name:* ${d.name}\n` +
+    `🛠️ *Work Type:* ${d.workType}\n` +
+    `📞 *Phone:* ${d.phone}\n` +
+    `✉️ *Email:* ${d.email}\n` +
+    `💬 *Notes:* ${d.message || "-"}\n\n` +
+    `_Received via Kandhan Groups Website_`;
+
+  for (const chatId of uniqueChats) {
+    try {
+      await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text,
+          parse_mode: "Markdown",
+          disable_web_page_preview: true,
+        }),
+      });
+    } catch (err) {
+      console.error(`[telegram send error ${chatId}]`, err);
+    }
+  }
+  return true;
+}
+
 export async function POST(req: Request) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   if (rateLimited(ip)) {
@@ -132,15 +175,15 @@ export async function POST(req: Request) {
   if (process.env.CALLMEBOT_APIKEY_2) {
     targets.push({ phone: process.env.WHATSAPP_PHONE_2 || "917795833418", key: process.env.CALLMEBOT_APIKEY_2 });
   }
-  // Fallback to legacy single key if defined
   if (targets.length === 0 && process.env.CALLMEBOT_APIKEY) {
     targets.push({ phone: process.env.WHATSAPP_PHONE || "916363902388", key: process.env.CALLMEBOT_APIKEY });
   }
 
-  // Dispatch email & WhatsApp in parallel
+  // Dispatch email, Telegram, and WhatsApp in parallel
   const tasks: Promise<unknown>[] = [];
 
   tasks.push(sendEmail(d).catch((e) => console.error("[email error]", e)));
+  tasks.push(sendTelegramAlert(d).catch((e) => console.error("[telegram error]", e)));
 
   for (const t of targets) {
     tasks.push(sendWhatsAppTo(t.phone, t.key, d).catch((e) => console.error(`[whatsapp error ${t.phone}]`, e)));
