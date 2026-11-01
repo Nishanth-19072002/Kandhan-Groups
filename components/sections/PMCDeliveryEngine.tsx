@@ -24,7 +24,7 @@ export default function PMCDeliveryEngine() {
           eyebrow="Delivery Engine & PMC"
           title="You hand over the project."
           highlight="We manage everything."
-          subtitle="One contract, one consolidated invoice, and zero headache. We coordinate vetted specialist contractors while our engineers supervise every stage."
+          subtitle="We take projects, manage, execute, finish, and handover from scratch — one contract, one consolidated invoice, and zero headache."
         />
 
         {/* ────────── 1. PMC TRIANGLE FLOW BAR ────────── */}

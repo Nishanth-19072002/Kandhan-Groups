@@ -8,7 +8,7 @@ export const siteConfig = {
   shortName: "Kandhan",
   tagline: "Building Tomorrow, Managing Everything.",
   description:
-    "Kandhan Groups delivers end-to-end civil construction, industrial & factory works, residential homes and complete Project Management Consultancy (PMC) — one partner, one bill, zero hassle.",
+    "Kandhan Groups delivers end-to-end civil contracts inside companies & factories, individual residential homes, building excavation, architectural design, plumbing & painting contracts, smart home automation, and complete turnkey project management from scratch to finishing.",
   url: "https://kandhangroups.vercel.app",
   /** Official company logo in /public */
   logo: "/logo.png" as string | null,
@@ -26,17 +26,14 @@ export const siteConfig = {
 };
 
 export const workTypes = [
-  "Industrial / Factory Civil Works",
-  "Residential House / Villa Construction",
-  "Commercial Building",
-  "Painting & Finishing",
-  "Plumbing & Sanitation",
-  "Electrical Works",
+  "Civil Work Contracts Inside Companies & Factories",
+  "Individual Homes & Residential Buildings",
+  "Building Excavation, Architecture & Planning",
+  "Plumbing, Painting & Finishing Contracts",
+  "Turnkey Project Management (Scratch to Finishing)",
+  "Architectural Planning & 3D Design",
+  "Software Solutions & Smart Home Automation",
   "Renovation & Remodelling",
-  "Waterproofing",
-  "Interior Works",
-  "Project Management Consultancy (PMC)",
-  "Architectural Design",
-  "Software / Website / App Solutions",
+  "Waterproofing & Surface Protection",
   "Other",
 ] as const;

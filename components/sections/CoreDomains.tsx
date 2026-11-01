@@ -19,43 +19,43 @@ type Domain = {
 const domains: Domain[] = [
   {
     key: "industrial",
-    tag: "Industrial & Plants",
+    tag: "Corporate & Factory Civil",
     icon: "factory",
-    title: "Factory Infrastructure & Heavy Civil",
+    title: "Civil Work Contracts Inside Companies & Factories",
     image: "/images/industrial.jpg",
-    desc: "From greenfield plants to facility upgrades. Heavy-duty industrial flooring, machine foundations, PEB sheds, roads, and utility works.",
-    bullets: ["Factory sheds & PEB structures", "Heavy machine foundations", "VDF / epoxy industrial flooring", "Compound walls & plant drainage"],
-    workType: "Industrial / Factory Civil Works",
+    desc: "Specialized civil contracts executed directly inside running companies, plants, and industrial facilities. Equipment foundations, internal modifications, industrial flooring, compound repairs, and plant maintenance.",
+    bullets: ["Civil contracts inside factories & IT companies", "Heavy machine foundations & equipment beds", "VDF / epoxy flooring & concrete repairs", "Internal partitions & plant maintenance"],
+    workType: "Civil Work Contracts Inside Companies & Factories",
   },
   {
     key: "residential",
-    tag: "Residential",
+    tag: "Turnkey Residential",
     icon: "home",
-    title: "Independent Homes & Luxury Villas",
+    title: "Individual Homes & Residential Buildings",
     image: "/images/residential.jpg",
-    desc: "Complete turnkey construction from bhoomi pooja to housewarming. Vastu-aligned architectural layouts, verified materials, and transparent schedules.",
-    bullets: ["Independent houses & villas", "Structural & civil execution", "Façade & elevation design", "Turnkey handover with warranty"],
-    workType: "Residential House / Villa Construction",
+    desc: "Complete construction of individual houses and residential buildings from scratch to finishing. We take projects, manage every detail, execute with quality, and hand over the keys ready to live in.",
+    bullets: ["Individual homes, villas & residential buildings", "Complete scratch-to-finishing construction", "Bhoomi pooja to housewarming delivery", "Vastu-aligned architectural layouts & design"],
+    workType: "Individual Homes & Residential Buildings",
   },
   {
-    key: "commercial",
-    tag: "Commercial",
-    icon: "building",
-    title: "Offices, Retail & Warehouses",
-    image: "/images/commercial.jpg",
-    desc: "Commercial spaces engineered for business performance. Fast-track timelines, structural safety, modern glazing, and code-compliant builds.",
-    bullets: ["Corporate offices & IT spaces", "Showrooms & commercial complexes", "Logistics sheds & godowns", "Façade, glazing & fit-outs"],
-    workType: "Commercial Building",
+    key: "planning",
+    tag: "Excavation & Design",
+    icon: "compass",
+    title: "Building Excavation, Architecture & Planning",
+    image: "/images/architecture.jpg",
+    desc: "Setting the foundation right with professional site excavation, 2D/3D architectural drawings, structural calculations, and creative elevation designs tailored for your plot.",
+    bullets: ["Precision building excavation & earthwork", "Architectural 2D floor plans & 3D elevations", "Structural engineering & blueprint approvals", "Complete site planning & layout design"],
+    workType: "Building Excavation, Architecture & Planning",
   },
   {
     key: "finishing",
-    tag: "Finishing & MEP",
+    tag: "Trade Contracts",
     icon: "paint",
-    title: "Painting, Plumbing & Electrical",
+    title: "Plumbing, Painting & Finishing Contracts",
     image: "/images/finishing.jpg",
-    desc: "Craftsmanship in the details that count. Interior & exterior painting, pressure-tested plumbing lines, certified electrical panels, and waterproofing.",
-    bullets: ["Interior & exterior painting", "Plumbing & sanitation systems", "Electrical cabling & panels", "Basement & terrace waterproofing"],
-    workType: "Painting & Finishing",
+    desc: "Dedicated specialist contracting for individual trades or full buildings. Premium interior & exterior painting, high-pressure plumbing networks, waterproofing, and flawless finishes.",
+    bullets: ["Interior & exterior painting contracts", "Plumbing & sanitation pipeline networks", "Waterproofing, tile & granite installations", "End-to-end execution with verified materials"],
+    workType: "Plumbing, Painting & Finishing Contracts",
   },
 ];
 
@@ -68,8 +68,8 @@ export default function CoreDomains() {
         <SectionHeading
           eyebrow="Core Domains"
           title="Engineered expertise across"
-          highlight="four sectors."
-          subtitle="All four construction divisions delivered with in-house project oversight, verified materials, and safety protocols."
+          highlight="our 4 core sectors."
+          subtitle="From excavation and architectural planning to company civil works, individual homes, and complete trade execution — we provide everything from scratch to finishing, managing and delivering turnkey results."
         />
 
         {/* 4 Cards visible side-by-side (2x2 grid) — NO HIDDEN TABS */}

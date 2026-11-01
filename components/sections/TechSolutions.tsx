@@ -16,23 +16,33 @@ const cards: {
   accent: "gold" | "cyan";
 }[] = [
   {
-    tag: "Architectural Solutions",
-    title: "Design that sees the future before it's built.",
+    tag: "Architectural Planning & 3D Design",
+    title: "Designs & 3D elevations planned from scratch.",
     image: "/images/architecture.jpg",
     icon: "compass",
-    desc: "We design spaces you can walk through before a single brick is laid, from concept sketches to photorealistic 3D elevations.",
-    points: ["Architectural planning & 2D/3D drawings", "3D elevations & walkthroughs", "Interior design concepts", "Vastu-aware layouts"],
-    work: "Architectural Design",
+    desc: "Walk through your dream building before laying a single brick. We provide complete architectural planning, photorealistic 3D elevations, structural blueprints, and Vastu-compliant layouts.",
+    points: [
+      "Architectural 2D floor plans & site layouts",
+      "Photorealistic 3D elevations & walkthroughs",
+      "Structural engineering & working drawings",
+      "Vastu-aware designs & space optimization",
+    ],
+    work: "Architectural Planning & 3D Design",
     accent: "gold",
   },
   {
-    tag: "Software Solutions",
-    title: "Smart digital solutions for modern businesses.",
+    tag: "Software & Smart Home Automation",
+    title: "Software solutions & home automation control for you.",
     image: "/images/software.jpg",
     icon: "code",
-    desc: "Modern digital products built with the same precision: lightning-fast business websites, web portals, apps, and tracking dashboards.",
-    points: ["High-converting business websites", "Custom web & mobile apps", "ERP / Project tracking tools", "Hosting, domain & maintenance"],
-    work: "Software / Website / App Solutions",
+    desc: "We build custom software solutions and integrate intelligent home automation systems. Control your lighting, security, appliances, and project tracking easily right from your phone.",
+    points: [
+      "Smart home automation & IoT mobile controls",
+      "Automated lighting, security & appliance control",
+      "Custom business software & web portals",
+      "Client project tracking & digital dashboards",
+    ],
+    work: "Software Solutions & Smart Home Automation",
     accent: "cyan",
   },
 ];
@@ -43,9 +53,9 @@ export default function TechSolutions() {
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
           eyebrow="Beyond Bricks"
-          title="Architecture &"
-          highlight="Digital Software."
-          subtitle="Complete design vision and digital tools to power modern physical and commercial ventures."
+          title="Architecture, Software &"
+          highlight="Home Automation."
+          subtitle="Architectural blueprint design combined with modern software solutions and smart home automation control for you."
         />
 
         <div className="mt-14 grid gap-6 lg:grid-cols-2">

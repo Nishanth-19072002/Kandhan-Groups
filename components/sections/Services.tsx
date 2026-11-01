@@ -8,9 +8,8 @@ import { openEnquiry } from "@/components/ui/brand";
 import { services } from "@/lib/content";
 import { workTypes } from "@/lib/siteConfig";
 
-const workMap = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 function pickWork(i: number) {
-  return workTypes[workMap[i] ?? workTypes.length - 1];
+  return services[i]?.workType || workTypes[Math.min(i, workTypes.length - 1)];
 }
 
 function ServiceCard({ s, i }: { s: (typeof services)[number]; i: number }) {
@@ -37,7 +36,7 @@ function ServiceCard({ s, i }: { s: (typeof services)[number]; i: number }) {
         ref={ref}
         onMouseMove={onMove}
         onMouseLeave={onLeave}
-        onClick={() => openEnquiry(pickWork(i))}
+        onClick={() => openEnquiry(s.workType || pickWork(i))}
         className={`group relative h-full w-full overflow-hidden rounded-2xl border border-white/8 bg-white/[0.03] p-6 text-left transition-[border-color,transform] duration-300 hover:border-gold/50 ${
           featured ? "md:flex md:items-center md:gap-8 bg-gradient-to-r from-gold/[0.1] to-cyan-bp/[0.07]" : ""
         }`}
@@ -128,7 +127,7 @@ export default function Services() {
           eyebrow="What we offer"
           title="Every kind of civil work."
           highlight="One trusted team."
-          subtitle="From a single bathroom renovation to a full factory build, we cover every trade and manage it all under one roof."
+          subtitle="From company civil contracts to individual homes, excavation, planning, and trade finishing — we manage and execute it all from scratch."
         />
 
         {/* ────────── INDUSTRIAL GANTRY CRANE BEAM ────────── */}

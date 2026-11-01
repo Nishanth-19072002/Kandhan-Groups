@@ -1,16 +1,66 @@
 import type { IconName } from "@/components/ui/Icon";
 
-export const services: { icon: IconName; title: string; desc: string }[] = [
-  { icon: "factory", title: "Industrial & Factory Civil Works", desc: "Foundations, sheds, PEB structures, flooring, compound walls and plant infrastructure built to industrial standards." },
-  { icon: "home", title: "Residential Construction", desc: "Independent houses, villas and duplexes, from bhoomi pooja to handover, built around how your family lives." },
-  { icon: "building", title: "Commercial Buildings", desc: "Offices, showrooms, warehouses and mixed-use spaces built to finish on time and within budget." },
-  { icon: "paint", title: "Painting & Finishing", desc: "Interior and exterior painting, texture and protective coatings, with a flawless, long-lasting finish." },
-  { icon: "pipe", title: "Plumbing & Sanitation", desc: "Water supply, drainage, STP lines and premium bathroom fittings: leak-free and pressure-tested." },
-  { icon: "bolt", title: "Electrical Works", desc: "Wiring, panels, lighting and industrial power distribution handled by certified electricians." },
-  { icon: "hammer", title: "Renovation & Remodelling", desc: "Breathe new life into old spaces with structural repairs, upgrades and full makeovers." },
-  { icon: "drop", title: "Waterproofing", desc: "Terrace, basement, bathroom and tank waterproofing that keeps the monsoon out for good." },
-  { icon: "sofa", title: "Interior Works", desc: "Modular kitchens, false ceilings, wardrobes and turnkey interiors that look as good as the design." },
-  { icon: "clipboard", title: "Project Management (PMC)", desc: "We plan, outsource, supervise and deliver your entire project. You get one point of contact and one bill." },
+export const services: { icon: IconName; title: string; desc: string; workType?: string }[] = [
+  {
+    icon: "factory",
+    title: "Civil Works in Companies & Factories",
+    desc: "In-plant civil contracts, machine foundations, heavy industrial flooring, partitions, and ongoing plant facility maintenance.",
+    workType: "Civil Work Contracts Inside Companies & Factories",
+  },
+  {
+    icon: "home",
+    title: "Individual Homes & Residential Buildings",
+    desc: "Complete construction from bhoomi pooja to housewarming. Turnkey execution from scratch to finishing with guaranteed delivery.",
+    workType: "Individual Homes & Residential Buildings",
+  },
+  {
+    icon: "compass",
+    title: "Building Excavation & Earthwork",
+    desc: "Precision site excavation, land leveling, soil clearing, and foundation trenching for houses and company facilities.",
+    workType: "Building Excavation, Architecture & Planning",
+  },
+  {
+    icon: "paint",
+    title: "Painting & Texture Finishing",
+    desc: "Interior & exterior painting contracts, weather-proof coatings, and premium texture finishing for homes and buildings.",
+    workType: "Plumbing, Painting & Finishing Contracts",
+  },
+  {
+    icon: "pipe",
+    title: "Plumbing & Sanitation Contracts",
+    desc: "Complete water supply lines, drainage, sewage pipelines, and premium sanitary fittings: leak-free and pressure-tested.",
+    workType: "Plumbing, Painting & Finishing Contracts",
+  },
+  {
+    icon: "compass",
+    title: "Architectural Planning & 3D Design",
+    desc: "2D floor plans, photorealistic 3D elevations, structural blueprints, and Vastu-compliant layouts engineered to precision.",
+    workType: "Architectural Planning & 3D Design",
+  },
+  {
+    icon: "code",
+    title: "Software & Home Automation Control",
+    desc: "Smart home automation systems to control lighting, climate, security, and custom software solutions for your operations.",
+    workType: "Software Solutions & Smart Home Automation",
+  },
+  {
+    icon: "hammer",
+    title: "Renovation & Remodelling",
+    desc: "Transform existing buildings with structural alterations, modern room additions, civil expansions, and full makeover execution.",
+    workType: "Renovation & Remodelling",
+  },
+  {
+    icon: "drop",
+    title: "Waterproofing & Protection",
+    desc: "Basement, terrace, bathroom, and overhead tank waterproofing systems engineered to stop all leaks permanently.",
+    workType: "Waterproofing & Surface Protection",
+  },
+  {
+    icon: "clipboard",
+    title: "Turnkey Project Management (PMC)",
+    desc: "We take your project, manage all contractors, supervise quality, and execute from scratch to finishing — one point of contact, one bill.",
+    workType: "Turnkey Project Management (Scratch to Finishing)",
+  },
 ];
 
 export type Specialization = {
