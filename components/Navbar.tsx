@@ -7,7 +7,7 @@ import { scrollToId } from "@/components/SmoothScroll";
 
 const links = [
   { id: "services", label: "Services" },
-  { id: "domains", label: "Sectors" },
+  { id: "domains", label: "Capabilities" },
   { id: "pmc", label: "PMC Engine" },
   { id: "tech", label: "Design & Tech" },
   { id: "contact", label: "Contact" },

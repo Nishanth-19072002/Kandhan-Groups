@@ -50,7 +50,7 @@ export default function Hero({ started }: { started: boolean }) {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
             </span>
-            Civil · Industrial · Residential · PMC
+            Civil Contracts · Turnkey Homes · Architecture · Trade Contracts · Smart Automation
           </motion.div>
 
           <h1 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.02] tracking-tight text-white sm:text-6xl xl:text-7xl">
@@ -74,9 +74,7 @@ export default function Hero({ started }: { started: boolean }) {
             transition={{ duration: 0.8, delay: 0.5, ease }}
             className="mt-6 max-w-xl text-base leading-relaxed text-slate-400 sm:text-lg"
           >
-            From <span className="text-slate-200">factory floors</span> to <span className="text-slate-200">family homes</span>,{" "}
-            {siteConfig.name} delivers end-to-end civil construction and complete project management. You get one partner, one
-            timeline and one bill.
+            From <span className="text-slate-200">company civil contracts</span> and <span className="text-slate-200">individual homes</span> to excavation, architectural planning, and smart home automation — {siteConfig.name} delivers everything from scratch to handover. You get one partner, one timeline, and one single bill.
           </motion.p>
 
           <motion.div
