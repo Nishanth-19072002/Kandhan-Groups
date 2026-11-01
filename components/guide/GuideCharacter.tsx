@@ -89,7 +89,7 @@ export default function GuideCharacter({
       <ellipse className="g-shadow" cx="110" cy="360" rx="52" ry="7" fill="#000" opacity="0.35" />
 
       <g className="g-body">
-        {/* Heavy industrial hoist cable with gold pull-handle ring */}
+        {/* Hoist cable with gold pull-handle ring */}
         <g className="g-rope">
           <line x1="144" y1="-300" x2="144" y2="340" stroke="#f5a524" strokeWidth="4.5" strokeLinecap="round" />
           <line className="g-rope-line" x1="144" y1="-300" x2="144" y2="340" stroke="#0b1220" strokeWidth="2.5" strokeDasharray="6 6" />

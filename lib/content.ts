@@ -4,7 +4,7 @@ export const services: { icon: IconName; title: string; desc: string; workType?:
   {
     icon: "factory",
     title: "Civil Works in Companies & Factories",
-    desc: "In-plant civil contracts, machine foundations, heavy industrial flooring, partitions, and ongoing plant facility maintenance.",
+    desc: "In-plant civil contracts, equipment foundation pads, flooring, partitions, and internal civil modifications.",
     workType: "Civil Work Contracts Inside Companies & Factories",
   },
   {
@@ -28,7 +28,7 @@ export const services: { icon: IconName; title: string; desc: string; workType?:
   {
     icon: "pipe",
     title: "Plumbing & Sanitation Contracts",
-    desc: "Complete water supply lines, drainage, sewage pipelines, and premium sanitary fittings: leak-free and pressure-tested.",
+    desc: "Complete water supply lines, sanitary pipelines, and premium bathroom fittings: leak-free and pressure-tested.",
     workType: "Plumbing, Painting & Finishing Contracts",
   },
   {
@@ -40,7 +40,7 @@ export const services: { icon: IconName; title: string; desc: string; workType?:
   {
     icon: "code",
     title: "Software & Home Automation Control",
-    desc: "Smart home automation systems to control lighting, climate, security, and custom software solutions for your operations.",
+    desc: "Smart home automation systems to control lighting, appliances, and custom software solutions for your operations.",
     workType: "Software Solutions & Smart Home Automation",
   },
   {
@@ -77,14 +77,14 @@ export type Specialization = {
 export const specializations: Specialization[] = [
   {
     key: "industrial",
-    label: "Industrial",
+    label: "Company Civil",
     icon: "factory",
     image: "/images/industrial.jpg",
-    title: "Industrial & Factory Infrastructure",
+    title: "Civil Works in Companies & Factories",
     description:
-      "Factories can't afford downtime. We run industrial civil works with tight schedules, strict safety protocols and engineering precision. That covers greenfield plants, capacity expansions and maintenance works inside a running facility.",
-    scope: ["Factory sheds & PEB structures", "Heavy-duty industrial flooring", "Machine foundations", "Roads, drains & compound walls", "Utility & ETP/STP civil works", "Annual maintenance contracts"],
-    outcomes: ["Minimal disruption to operations", "Safety-first execution", "Quality checks at every stage"],
+      "We execute internal civil work contracts inside operating companies and factories with tight schedules and quality execution. Covering civil alterations, flooring, partitions, and plant facility upgrades.",
+    scope: ["Company & factory civil contracts", "VDF & epoxy flooring", "Equipment foundation pads", "Internal partitions & compound walls", "Civil modifications & renovations"],
+    outcomes: ["Minimal disruption to operations", "Clean and timely execution", "Quality checks at every stage"],
   },
   {
     key: "residential",

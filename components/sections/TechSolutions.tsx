@@ -35,10 +35,10 @@ const cards: {
     title: "Software solutions & home automation control for you.",
     image: "/images/software.jpg",
     icon: "code",
-    desc: "We build custom software solutions and integrate intelligent home automation systems. Control your lighting, security, appliances, and project tracking easily right from your phone.",
+    desc: "We build custom software solutions and integrate intelligent home automation systems. Control your lighting, appliances, smart switches, and project tracking easily right from your phone.",
     points: [
       "Smart home automation & IoT mobile controls",
-      "Automated lighting, security & appliance control",
+      "Automated lighting & smart appliance controls",
       "Custom business software & web portals",
       "Client project tracking & digital dashboards",
     ],
