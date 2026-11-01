@@ -35,34 +35,54 @@ async function sendEmail(d: Enquiry) {
     auth: { user, pass },
   });
 
-  const rows = [
-    ["Client Name", d.name],
-    ["Type of Work", d.workType],
-    ["Phone Number", d.phone],
-    ["Email Address", d.email],
-    ["Project Notes", d.message || "—"],
-  ]
+  const items = [
+    { label: "Client Name", val: d.name, highlight: false },
+    { label: "Type of Work", val: d.workType, highlight: true },
+    { label: "Phone Number", val: d.phone, highlight: false },
+    { label: "Email Address", val: d.email, highlight: false },
+    { label: "Project Notes", val: d.message || "No additional notes provided", highlight: false },
+  ];
+
+  const cardsHtml = items
     .map(
-      ([k, v]) =>
-        `<tr><td style="padding:10px 14px;color:#94a3b8;font-size:13px;border-bottom:1px solid #1e293b;width:140px">${k}</td><td style="padding:10px 14px;color:#f8fafc;font-size:15px;border-bottom:1px solid #1e293b;font-weight:600">${esc(
-          v!
-        )}</td></tr>`
+      (item) => `
+      <div style="padding:14px 18px;border-bottom:1px solid #1e293b;background:#0f172a">
+        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#f5a524">${esc(item.label)}</div>
+        <div style="font-size:15px;font-weight:600;color:${item.highlight ? '#f5a524' : '#f8fafc'};margin-top:4px;word-break:break-word;overflow-wrap:anywhere;line-height:1.4">${esc(item.val)}</div>
+      </div>`
     )
     .join("");
 
+  const cleanDigits = d.phone.replace(/[^\d]/g, "");
+
   const html = `
-  <div style="background:#070b14;padding:32px 16px;font-family:Segoe UI,Arial,sans-serif">
-    <div style="max-width:580px;margin:auto;background:#0f172a;border:1px solid #f5a52444;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.5)">
-      <div style="padding:24px 28px;background:linear-gradient(135deg,#f5a524,#d97706);color:#070b14">
-        <div style="font-size:11px;letter-spacing:3px;font-weight:800;text-transform:uppercase">NEW CLIENT ENQUIRY</div>
-        <div style="font-size:24px;font-weight:800;margin-top:4px">${esc(siteConfig.name)}</div>
-        <div style="font-size:12px;opacity:0.85">Bengaluru & South India Operations</div>
+  <div style="background:#070b14;padding:16px 8px;font-family:Segoe UI,Roboto,-apple-system,Arial,sans-serif;-webkit-text-size-adjust:100%">
+    <div style="max-width:540px;margin:0 auto;background:#0f172a;border:1px solid #f5a52455;border-radius:18px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,0.6)">
+      
+      <!-- Brand Header -->
+      <div style="padding:22px 20px;background:linear-gradient(135deg,#f5a524,#d97706);color:#070b14">
+        <div style="font-size:10px;letter-spacing:2.5px;font-weight:800;text-transform:uppercase">NEW CLIENT ENQUIRY</div>
+        <div style="font-size:22px;font-weight:800;margin-top:3px;line-height:1.2">${esc(siteConfig.name)}</div>
+        <div style="font-size:12px;opacity:0.9;margin-top:2px">Bengaluru &amp; South India Operations</div>
       </div>
-      <table style="width:100%;border-collapse:collapse;margin-top:8px">${rows}</table>
-      <div style="padding:22px 28px;background:#0b1220;border-top:1px solid #1e293b">
-        <a href="tel:${esc(d.phone)}" style="display:inline-block;background:#f5a524;color:#070b14;padding:11px 20px;border-radius:999px;text-decoration:none;font-weight:700;margin-right:10px;font-size:13px">Call Client</a>
-        <a href="https://wa.me/${d.phone.replace(/[^\d]/g, "")}" style="display:inline-block;background:#22c55e;color:#070b14;padding:11px 20px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px">Open in WhatsApp</a>
+
+      <!-- Detail Cards (Stacked for 100% Mobile & Desktop Responsiveness) -->
+      <div>${cardsHtml}</div>
+
+      <!-- Action Buttons -->
+      <div style="padding:18px;background:#0b1220;text-align:center">
+        <table style="width:100%;border-collapse:collapse">
+          <tr>
+            <td style="padding:4px">
+              <a href="tel:${esc(d.phone)}" style="display:block;background:#f5a524;color:#070b14;padding:12px 14px;border-radius:12px;text-decoration:none;font-weight:700;font-size:14px;text-align:center;box-sizing:border-box">📞 Call Client</a>
+            </td>
+            <td style="padding:4px">
+              <a href="https://wa.me/${cleanDigits}" style="display:block;background:#22c55e;color:#070b14;padding:12px 14px;border-radius:12px;text-decoration:none;font-weight:700;font-size:14px;text-align:center;box-sizing:border-box">💬 WhatsApp</a>
+            </td>
+          </tr>
+        </table>
       </div>
+
     </div>
   </div>`;
 
