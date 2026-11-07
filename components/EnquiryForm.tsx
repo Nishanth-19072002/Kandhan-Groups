@@ -93,15 +93,15 @@ export default function EnquiryForm({
             </a>
           )}
 
-          <button onClick={() => setStatus("idle")} className="mt-4 text-xs font-semibold text-gold hover:underline">
+          <button suppressHydrationWarning onClick={() => setStatus("idle")} className="mt-4 text-xs font-semibold text-gold hover:underline">
             Send another enquiry
           </button>
         </motion.div>
       ) : (
         <motion.form key="form" onSubmit={submit} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-3" noValidate>
           <div className={compact ? "space-y-3" : "grid gap-3 sm:grid-cols-2"}>
-            <input className={input} placeholder="Your name *" value={form.name} onChange={set("name")} autoComplete="name" />
-            <select className={`${input} appearance-none ${form.workType ? "" : "text-slate-500"}`} value={form.workType} onChange={set("workType")}>
+            <input suppressHydrationWarning className={input} placeholder="Your name *" value={form.name} onChange={set("name")} autoComplete="name" />
+            <select suppressHydrationWarning className={`${input} appearance-none ${form.workType ? "" : "text-slate-500"}`} value={form.workType} onChange={set("workType")}>
               <option value="" disabled>
                 Type of work *
               </option>
@@ -111,8 +111,8 @@ export default function EnquiryForm({
                 </option>
               ))}
             </select>
-            <input className={input} placeholder="Phone number *" type="tel" value={form.phone} onChange={set("phone")} autoComplete="tel" />
-            <input className={input} placeholder="Email address *" type="email" value={form.email} onChange={set("email")} autoComplete="email" />
+            <input suppressHydrationWarning className={input} placeholder="Phone number *" type="tel" value={form.phone} onChange={set("phone")} autoComplete="tel" />
+            <input suppressHydrationWarning className={input} placeholder="Email address *" type="email" value={form.email} onChange={set("email")} autoComplete="email" />
           </div>
           <textarea
             className={`${input} resize-none`}
@@ -122,11 +122,11 @@ export default function EnquiryForm({
             onChange={set("message")}
           />
           {/* honeypot */}
-          <input type="text" tabIndex={-1} autoComplete="off" value={form.company} onChange={set("company")} className="hidden" aria-hidden />
+          <input suppressHydrationWarning type="text" tabIndex={-1} autoComplete="off" value={form.company} onChange={set("company")} className="hidden" aria-hidden />
 
           {error && <p className="text-sm text-red-400">{error}</p>}
 
-          <button
+          <button suppressHydrationWarning
             type="submit"
             disabled={status === "sending"}
             className="shine group flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-gold to-amber-deep px-6 py-3.5 font-semibold text-ink transition hover:brightness-110 disabled:opacity-70"

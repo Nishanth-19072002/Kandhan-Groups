@@ -25,7 +25,7 @@ export default function Footer() {
                 ["contact", "Contact"],
               ].map(([id, l]) => (
                 <li key={id}>
-                  <button onClick={() => scrollToId(id)} className="transition hover:text-white">
+                  <button suppressHydrationWarning onClick={() => scrollToId(id)} className="transition hover:text-white">
                     {l}
                   </button>
                 </li>

@@ -87,7 +87,7 @@ export default function EnquiryWidget({ ready }: { ready: boolean }) {
                     <div className="font-display font-bold text-white">Let&apos;s build together</div>
                     <div className="text-xs text-slate-400">Tell us about your project · we reply fast</div>
                   </div>
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => setOpen(false)}
                     className="grid h-9 w-9 place-items-center rounded-xl text-slate-400 hover:bg-white/10 hover:text-white"
                     aria-label="Close"
@@ -128,7 +128,7 @@ export default function EnquiryWidget({ ready }: { ready: boolean }) {
         <div className={`relative flex items-center gap-3 ${open ? "max-sm:hidden" : ""}`}>
           <AnimatePresence>
             {nudge && !open && (
-              <motion.button
+              <motion.button suppressHydrationWarning
                 onClick={() => setOpen(true)}
                 initial={{ opacity: 0, x: 20, scale: 0.8 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -140,7 +140,7 @@ export default function EnquiryWidget({ ready }: { ready: boolean }) {
             )}
           </AnimatePresence>
 
-          <motion.button
+          <motion.button suppressHydrationWarning
             initial={{ scale: 0, rotate: -30 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 260, damping: 16, delay: 0.6 }}

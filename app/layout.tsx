@@ -49,8 +49,8 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`}>
-      <body className="noise">
+    <html lang="en" suppressHydrationWarning className={`${display.variable} ${body.variable}`}>
+      <body className="noise" suppressHydrationWarning>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <SmoothScroll>{children}</SmoothScroll>
       </body>

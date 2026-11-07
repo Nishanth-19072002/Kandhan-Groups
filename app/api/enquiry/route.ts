@@ -1,3 +1,4 @@
+import { saveEnquiryToCRM } from "@/lib/crm";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { enquirySchema, type Enquiry } from "@/lib/validation";
@@ -202,6 +203,7 @@ export async function POST(req: Request) {
   // Dispatch email, Telegram, and WhatsApp in parallel
   const tasks: Promise<unknown>[] = [];
 
+  tasks.push(saveEnquiryToCRM(d));
   tasks.push(sendEmail(d).catch((e) => console.error("[email error]", e)));
   tasks.push(sendTelegramAlert(d).catch((e) => console.error("[telegram error]", e)));
 

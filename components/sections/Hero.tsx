@@ -83,14 +83,14 @@ export default function Hero({ started }: { started: boolean }) {
             transition={{ duration: 0.8, delay: 0.65, ease }}
             className="mt-9 flex flex-wrap gap-3"
           >
-            <button
+            <button suppressHydrationWarning
               onClick={() => openEnquiry()}
               className="shine group flex items-center gap-2 rounded-full bg-gradient-to-r from-gold to-amber-deep px-7 py-3.5 font-semibold text-ink glow-gold transition hover:brightness-110"
             >
               Get a Free Quote
               <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" strokeWidth={2.2} />
             </button>
-            <button
+            <button suppressHydrationWarning
               onClick={() => scrollToId("services")}
               className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 font-semibold text-white backdrop-blur transition hover:border-gold/50 hover:bg-white/10"
             >
@@ -166,7 +166,7 @@ export default function Hero({ started }: { started: boolean }) {
                 </motion.div>
               )}
             </AnimatePresence>
-            <button
+            <button suppressHydrationWarning
               className="block w-full cursor-pointer"
               onMouseEnter={() => arrived && setPose("wave")}
               onMouseLeave={() => arrived && setPose("point")}
@@ -180,7 +180,7 @@ export default function Hero({ started }: { started: boolean }) {
       </div>
 
       {/* scroll cue */}
-      <motion.button
+      <motion.button suppressHydrationWarning
         onClick={() => scrollToId("about")}
         initial={{ opacity: 0 }}
         animate={started ? { opacity: 1 } : {}}

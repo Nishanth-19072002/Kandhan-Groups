@@ -173,7 +173,7 @@ export default function CoreDomains() {
                 {/* Action button */}
                 <div className="mt-5 pt-3.5 border-t border-white/5 flex items-center justify-between">
                   <span className="text-xs font-mono text-cyan-bp/80">CAPABILITY 0{i + 1}</span>
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => openEnquiry(d.workType)}
                     className="shine group/btn inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white transition hover:bg-gold hover:text-ink"
                   >

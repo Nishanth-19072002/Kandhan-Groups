@@ -114,7 +114,7 @@ export default function PMCDeliveryEngine() {
             {processSteps.map((step, i) => {
               const selected = activeStep === i;
               return (
-                <button
+                <button suppressHydrationWarning
                   key={step.title}
                   onClick={() => setActiveStep(i)}
                   className={`group relative flex flex-col items-center rounded-2xl p-3 text-center transition-all ${
@@ -159,7 +159,7 @@ export default function PMCDeliveryEngine() {
               </div>
             </div>
 
-            <button
+            <button suppressHydrationWarning
               onClick={() => openEnquiry("Project Management Consultancy (PMC)")}
               className="shine shrink-0 self-start sm:self-auto rounded-full bg-gold px-4 py-2 text-xs font-semibold text-ink transition hover:brightness-110"
             >

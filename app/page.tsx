@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import IntroLoader from "@/components/IntroLoader";
 import Navbar from "@/components/Navbar";
 import EnquiryWidget from "@/components/EnquiryWidget";
@@ -12,8 +12,17 @@ import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const done = useCallback(() => setLoaded(true), []);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className="fixed inset-0 bg-[#070b14]" />;
+  }
 
   return (
     <>

@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Logo, openEnquiry } from "@/components/ui/brand";
 import Icon from "@/components/ui/Icon";
 import { scrollToId } from "@/components/SmoothScroll";
+import { HardHat } from "lucide-react";
 
 const links = [
   { id: "services", label: "Services" },
@@ -47,13 +49,13 @@ export default function Navbar() {
             scrolled ? "glass mx-3 shadow-2xl shadow-black/40 sm:mx-6 xl:mx-auto" : ""
           }`}
         >
-          <button onClick={() => go("top")} aria-label="Home">
+          <button suppressHydrationWarning onClick={() => go("top")} aria-label="Home">
             <Logo />
           </button>
 
           <nav className="hidden items-center gap-1 lg:flex">
             {links.map((l) => (
-              <button
+              <button suppressHydrationWarning
                 key={l.id}
                 onClick={() => go(l.id)}
                 className="group relative px-3 py-2 text-sm text-slate-300 transition hover:text-white"
@@ -64,14 +66,26 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <button
+          <div className="flex items-center gap-2.5">
+            {/* Kandhan Groups Employee Login Button */}
+            <Link
+              href="/admin/login"
+              className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3.5 py-2 text-xs font-semibold text-amber-300 transition hover:bg-amber-500/20 hover:border-amber-400"
+              title="Staff Portal for Kandhan Groups Team Only"
+            >
+              <HardHat className="h-3.5 w-3.5 text-amber-400" />
+              <span className="hidden sm:inline">Employees Login</span>
+              <span className="sm:hidden">Staff</span>
+            </Link>
+
+            <button suppressHydrationWarning
               onClick={() => openEnquiry()}
-              className="shine hidden rounded-full bg-gradient-to-r from-gold to-amber-deep px-5 py-2.5 text-sm font-semibold text-ink transition hover:brightness-110 sm:block"
+              className="shine hidden rounded-full bg-gradient-to-r from-gold to-amber-deep px-5 py-2.5 text-sm font-semibold text-ink transition hover:brightness-110 md:block"
             >
               Get a Quote
             </button>
-            <button
+
+            <button suppressHydrationWarning
               onClick={() => setOpen((o) => !o)}
               className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-white lg:hidden"
               aria-label="Menu"
@@ -90,7 +104,7 @@ export default function Navbar() {
               className="glass mx-3 mt-2 rounded-2xl p-3 lg:hidden"
             >
               {links.map((l, i) => (
-                <motion.button
+                <motion.button suppressHydrationWarning
                   key={l.id}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -101,7 +115,17 @@ export default function Navbar() {
                   {l.label}
                 </motion.button>
               ))}
-              <button
+
+              <Link
+                href="/admin/login"
+                onClick={() => setOpen(false)}
+                className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 font-semibold text-amber-300"
+              >
+                <HardHat className="h-4 w-4 text-amber-400" />
+                Employees Login (Staff Only)
+              </Link>
+
+              <button suppressHydrationWarning
                 onClick={() => {
                   setOpen(false);
                   openEnquiry();
@@ -117,4 +141,3 @@ export default function Navbar() {
     </>
   );
 }
-

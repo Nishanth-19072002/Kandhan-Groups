@@ -26,7 +26,7 @@ export default function Specializations() {
         <div className="mt-12 flex justify-center">
           <div className="glass flex max-w-full gap-1 overflow-x-auto rounded-full p-1.5 [scrollbar-width:none]">
             {specializations.map((sp, i) => (
-              <button
+              <button suppressHydrationWarning
                 key={sp.key}
                 onClick={() => setActive(i)}
                 className={`relative flex shrink-0 items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium transition sm:px-5 ${
@@ -132,7 +132,7 @@ export default function Specializations() {
                   ))}
                 </div>
 
-                <button
+                <button suppressHydrationWarning
                   onClick={() => openEnquiry()}
                   className="shine group mt-auto flex w-fit items-center gap-2 self-start rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-gold-2 max-lg:mt-8 lg:mt-8"
                 >

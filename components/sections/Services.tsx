@@ -32,7 +32,7 @@ function ServiceCard({ s, i }: { s: (typeof services)[number]; i: number }) {
 
   return (
     <div className={featured ? "sm:col-span-2 xl:col-span-3" : ""}>
-      <button
+      <button suppressHydrationWarning
         ref={ref}
         onMouseMove={onMove}
         onMouseLeave={onLeave}
@@ -143,7 +143,7 @@ export default function Services() {
             </div>
 
             {/* Interactive button to re-trigger pulling */}
-            <button
+            <button suppressHydrationWarning
               onClick={triggerPull}
               className="shine group flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-xs font-semibold text-gold-2 transition hover:bg-gold hover:text-ink"
             >
@@ -219,7 +219,7 @@ export default function Services() {
                   }`}
                 />
 
-                <button
+                <button suppressHydrationWarning
                   onClick={triggerPull}
                   className="group block w-full cursor-pointer text-left"
                   title="Click to pull services board!"

@@ -185,6 +185,7 @@ export default function IntroLoader({ onDone }: { onDone: () => void }) {
 
           <button
             onClick={skip}
+            suppressHydrationWarning
             className="absolute bottom-6 right-6 text-xs uppercase tracking-[0.25em] text-slate-400 transition hover:text-gold"
           >
             Enter Site →

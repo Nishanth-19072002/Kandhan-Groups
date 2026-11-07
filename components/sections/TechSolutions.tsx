@@ -99,7 +99,7 @@ export default function TechSolutions() {
                 </div>
                 <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
                   <span className="font-mono text-xs text-slate-500">KANDHAN TECH DIVISION</span>
-                  <button
+                  <button suppressHydrationWarning
                     onClick={() => openEnquiry(c.work)}
                     className={`inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold transition ${
                       c.accent === "gold"

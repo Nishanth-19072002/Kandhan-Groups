@@ -165,7 +165,7 @@ export default function PMCModel() {
                 </li>
               ))}
             </ul>
-            <button
+            <button suppressHydrationWarning
               onClick={() => openEnquiry("Project Management Consultancy (PMC)")}
               className="relative mt-7 inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-ink transition hover:brightness-110"
             >
