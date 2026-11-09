@@ -100,7 +100,7 @@ export default async function AdminDashboardPage() {
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 sm:gap-3">
             <Link
               href="/admin/quotations"
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition shadow-lg shadow-amber-500/25"
@@ -319,8 +319,8 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* Recent Enquiries Table (Crisp White Card) */}
-      <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-sm">
-        <div className="flex items-center justify-between mb-4">
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-6 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
           <div>
             <h2 className="text-base font-extrabold text-slate-900">Recent Enquiries & Site Requests</h2>
             <p className="text-xs text-slate-500">Leads captured from website and direct phone calls</p>
@@ -338,8 +338,8 @@ export default async function AdminDashboardPage() {
             No client enquiries recorded yet. Click &quot;New Client / Lead&quot; to add your first enquiry.
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+          <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+            <table className="w-full min-w-[550px] text-left text-xs">
               <thead className="border-b border-slate-200 bg-slate-50 text-slate-600 uppercase tracking-wider text-[10px]">
                 <tr>
                   <th className="py-3 px-3 font-bold">Client Name</th>

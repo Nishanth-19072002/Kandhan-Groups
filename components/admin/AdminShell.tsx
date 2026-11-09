@@ -171,11 +171,21 @@ export default function AdminShell({ user, children }: AdminShellProps) {
         <button
           suppressHydrationWarning
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 rounded-lg bg-slate-800 text-slate-300"
+          className="p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white"
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
+
+      {/* Mobile Backdrop */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs z-35 md:hidden"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
 
       {/* Sidebar Navigation: Deep Corporate Navy (#0B192C / #0f172a) */}
       <aside

@@ -63,7 +63,7 @@ export default function AdminLoginPage() {
         </div>
 
         {/* Secure Login Card */}
-        <div className="bg-white border border-slate-200/80 rounded-2xl p-8 shadow-xl shadow-slate-200/50">
+        <div className="bg-white border border-slate-200/80 rounded-2xl p-5 sm:p-8 shadow-xl shadow-slate-200/50">
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-1">
               <ShieldCheck className="w-4 h-4 text-amber-600" />

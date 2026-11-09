@@ -253,12 +253,12 @@ export default function Services() {
                 </div>
 
                 {/* Board header */}
-                <div className="mb-6 flex items-center justify-between overflow-hidden rounded-2xl border border-gold/30 bg-ink/80 px-4 py-2.5">
-                  <div className="h-4 w-12 rounded bg-[repeating-linear-gradient(-45deg,#f5a524_0_6px,#0b1220_6px_12px)] sm:w-24" />
-                  <div className="font-display text-xs font-bold uppercase tracking-[0.3em] text-gold-2 sm:text-sm">
+                <div className="mb-6 flex items-center justify-center sm:justify-between overflow-hidden rounded-2xl border border-gold/30 bg-ink/80 px-4 py-2.5">
+                  <div className="hidden sm:block h-4 w-12 rounded bg-[repeating-linear-gradient(-45deg,#f5a524_0_6px,#0b1220_6px_12px)] sm:w-24 shrink-0" />
+                  <div className="font-display text-[11px] sm:text-sm font-bold uppercase tracking-wider sm:tracking-[0.3em] text-gold-2 text-center">
                     Kandhan Groups · Official Civil Scope
                   </div>
-                  <div className="h-4 w-12 rounded bg-[repeating-linear-gradient(45deg,#f5a524_0_6px,#0b1220_6px_12px)] sm:w-24" />
+                  <div className="hidden sm:block h-4 w-12 rounded bg-[repeating-linear-gradient(45deg,#f5a524_0_6px,#0b1220_6px_12px)] sm:w-24 shrink-0" />
                 </div>
 
                 {/* Service Cards Grid */}

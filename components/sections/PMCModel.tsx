@@ -74,28 +74,28 @@ export default function PMCModel() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative mx-auto grid aspect-square w-full max-w-[340px] place-items-center"
+            className="relative mx-auto grid aspect-square w-full max-w-[270px] sm:max-w-[340px] place-items-center"
           >
             <div className="absolute inset-0 animate-spin-slow rounded-full border border-dashed border-gold/30" />
-            <div className="absolute inset-6 rounded-full border border-cyan-bp/20" style={{ animation: "spin-slow 30s linear infinite reverse" }} />
-            <div className="absolute inset-12 rounded-full bg-gold/10 blur-2xl" />
+            <div className="absolute inset-4 sm:inset-6 rounded-full border border-cyan-bp/20" style={{ animation: "spin-slow 30s linear infinite reverse" }} />
+            <div className="absolute inset-8 sm:inset-12 rounded-full bg-gold/10 blur-2xl" />
             {roles.map((r, i) => {
               const a = (i / roles.length) * Math.PI * 2 - Math.PI / 2;
               return (
                 <span
                   key={r}
-                  className="absolute rounded-full border border-gold/40 bg-ink/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-gold-2"
-                  style={{ left: `${50 + Math.cos(a) * 46}%`, top: `${50 + Math.sin(a) * 46}%`, transform: "translate(-50%,-50%)" }}
+                  className="absolute rounded-full border border-gold/40 bg-ink/90 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-gold-2 whitespace-nowrap shadow-md"
+                  style={{ left: `${50 + Math.cos(a) * 44}%`, top: `${50 + Math.sin(a) * 44}%`, transform: "translate(-50%,-50%)" }}
                 >
                   {r}
                 </span>
               );
             })}
-            <div className="relative grid h-40 w-40 place-items-center rounded-full bg-gradient-to-br from-panel to-ink text-center ring-1 ring-gold/50 glow-gold">
+            <div className="relative grid h-32 w-32 sm:h-40 sm:w-40 place-items-center rounded-full bg-gradient-to-br from-panel to-ink text-center ring-1 ring-gold/50 glow-gold">
               <div>
-                <KMark className="mx-auto h-12 w-12" />
-                <div className="mt-2 font-display text-sm font-extrabold tracking-[0.2em] text-white">KANDHAN</div>
-                <div className="text-[10px] tracking-[0.3em] text-gold">PMC CORE</div>
+                <KMark className="mx-auto h-9 w-9 sm:h-12 sm:w-12" />
+                <div className="mt-1.5 sm:mt-2 font-display text-xs sm:text-sm font-extrabold tracking-[0.2em] text-white">KANDHAN</div>
+                <div className="text-[9px] sm:text-[10px] tracking-[0.3em] text-gold">PMC CORE</div>
               </div>
             </div>
           </motion.div>

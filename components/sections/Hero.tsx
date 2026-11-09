@@ -44,16 +44,18 @@ export default function Hero({ started }: { started: boolean }) {
             initial={{ opacity: 0, y: 20 }}
             animate={started ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs text-slate-300 backdrop-blur"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-[11px] sm:text-xs text-slate-300 backdrop-blur max-w-full"
           >
-            <span className="relative flex h-2 w-2">
+            <span className="relative flex h-2 w-2 shrink-0">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
             </span>
-            Civil Contracts · Turnkey Homes · Architecture · Trade Contracts · Smart Automation
+            <span className="truncate sm:whitespace-normal">
+              Civil Contracts · Turnkey Homes · Architecture · Trade Contracts · Smart Automation
+            </span>
           </motion.div>
 
-          <h1 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.02] tracking-tight text-white sm:text-6xl xl:text-7xl">
+          <h1 className="mt-5 sm:mt-6 font-display text-[2.25rem] sm:text-6xl xl:text-7xl font-extrabold leading-[1.08] sm:leading-[1.02] tracking-tight text-white">
             {["Building Tomorrow.", "Managing Everything."].map((line, i) => (
               <span key={line} className="block overflow-hidden pb-1">
                 <motion.span
@@ -72,7 +74,7 @@ export default function Hero({ started }: { started: boolean }) {
             initial={{ opacity: 0, y: 20 }}
             animate={started ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.5, ease }}
-            className="mt-6 max-w-xl text-base leading-relaxed text-slate-400 sm:text-lg"
+            className="mt-5 sm:mt-6 max-w-xl text-sm leading-relaxed text-slate-400 sm:text-lg"
           >
             From <span className="text-slate-200">company civil contracts</span> and <span className="text-slate-200">individual homes</span> to excavation, architectural planning, and smart home automation — {siteConfig.name} delivers everything from scratch to handover. You get one partner, one timeline, and one single bill.
           </motion.p>
@@ -81,18 +83,18 @@ export default function Hero({ started }: { started: boolean }) {
             initial={{ opacity: 0, y: 20 }}
             animate={started ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.65, ease }}
-            className="mt-9 flex flex-wrap gap-3"
+            className="mt-7 sm:mt-9 flex flex-col sm:flex-row flex-wrap gap-3"
           >
             <button suppressHydrationWarning
               onClick={() => openEnquiry()}
-              className="shine group flex items-center gap-2 rounded-full bg-gradient-to-r from-gold to-amber-deep px-7 py-3.5 font-semibold text-ink glow-gold transition hover:brightness-110"
+              className="shine group flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold to-amber-deep px-7 py-3.5 font-semibold text-ink glow-gold transition hover:brightness-110 w-full sm:w-auto"
             >
               Get a Free Quote
               <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" strokeWidth={2.2} />
             </button>
             <button suppressHydrationWarning
               onClick={() => scrollToId("services")}
-              className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 font-semibold text-white backdrop-blur transition hover:border-gold/50 hover:bg-white/10"
+              className="flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 font-semibold text-white backdrop-blur transition hover:border-gold/50 hover:bg-white/10 w-full sm:w-auto"
             >
               Explore Services
             </button>
@@ -102,17 +104,19 @@ export default function Hero({ started }: { started: boolean }) {
             initial={{ opacity: 0 }}
             animate={started ? { opacity: 1 } : {}}
             transition={{ duration: 1, delay: 0.9 }}
-            className="mt-10 grid max-w-xl grid-cols-3 gap-3"
+            className="mt-8 sm:mt-10 grid max-w-xl grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3"
           >
             {[
               { icon: "user" as const, t: "One Point", s: "of Contact" },
               { icon: "layers" as const, t: "One Single", s: "Consolidated Bill" },
               { icon: "shield" as const, t: "End-to-End", s: "Accountability" },
             ].map((b) => (
-              <div key={b.t} className="glass rounded-2xl p-3 sm:p-4">
-                <Icon name={b.icon} className="h-5 w-5 text-gold" />
-                <div className="mt-2 text-[13px] font-semibold leading-tight text-white sm:text-sm">{b.t}</div>
-                <div className="text-[11px] text-slate-400 sm:text-xs">{b.s}</div>
+              <div key={b.t} className="glass rounded-2xl p-3 sm:p-4 flex sm:block items-center gap-3 sm:gap-0">
+                <Icon name={b.icon} className="h-5 w-5 text-gold shrink-0" />
+                <div>
+                  <div className="sm:mt-2 text-[13px] font-semibold leading-tight text-white sm:text-sm">{b.t}</div>
+                  <div className="text-[11px] text-slate-400 sm:text-xs">{b.s}</div>
+                </div>
               </div>
             ))}
           </motion.div>

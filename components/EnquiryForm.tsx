@@ -54,7 +54,7 @@ export default function EnquiryForm({
   };
 
   const input =
-    "w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-gold/60 focus:bg-white/[0.07] focus:ring-2 focus:ring-gold/20";
+    "w-full rounded-xl border border-white/10 bg-white/[0.04] px-3.5 sm:px-4 py-2.5 sm:py-3 text-base sm:text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-gold/60 focus:bg-white/[0.07] focus:ring-2 focus:ring-gold/20";
 
   const options = presetWork && !workTypes.includes(presetWork as (typeof workTypes)[number]) ? [presetWork, ...workTypes] : workTypes;
 
