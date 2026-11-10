@@ -277,11 +277,11 @@ export default function SettingsPage() {
       </div>
 
       {/* Tabs Bar */}
-      <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
+      <div className="flex items-center gap-2 border-b border-slate-200 pb-2 overflow-x-auto scrollbar-none">
         <button
           suppressHydrationWarning
           onClick={() => setActiveTab("PROFILE")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer shrink-0 ${
             activeTab === "PROFILE"
               ? "bg-[#0B192C] text-white shadow-xs"
               : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
@@ -294,7 +294,7 @@ export default function SettingsPage() {
         <button
           suppressHydrationWarning
           onClick={() => setActiveTab("BANKS")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer shrink-0 ${
             activeTab === "BANKS"
               ? "bg-[#0B192C] text-white shadow-xs"
               : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
@@ -307,7 +307,7 @@ export default function SettingsPage() {
         <button
           suppressHydrationWarning
           onClick={() => setActiveTab("MASTER_ITEMS")}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer shrink-0 ${
             activeTab === "MASTER_ITEMS"
               ? "bg-[#0B192C] text-white shadow-xs"
               : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"

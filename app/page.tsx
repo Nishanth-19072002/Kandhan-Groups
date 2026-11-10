@@ -28,7 +28,7 @@ export default function Home() {
     <>
       {!loaded && <IntroLoader onDone={done} />}
       {loaded && <Navbar />}
-      <main>
+      <main className="overflow-x-hidden w-full max-w-full">
         {/* Scroll 1: Hero & Animated Welcoming Guide + 3D Tower */}
         <Hero started={loaded} />
 

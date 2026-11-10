@@ -16,6 +16,9 @@ html {
   background: var(--color-ink);
   color: #e2e8f0;
   scroll-behavior: auto;
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 html.lenis, html.lenis body { height: auto; }
@@ -24,6 +27,8 @@ html.lenis, html.lenis body { height: auto; }
 body {
   font-family: var(--font-sans);
   overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
   -webkit-font-smoothing: antialiased;
 }
 

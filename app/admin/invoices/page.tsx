@@ -369,7 +369,7 @@ export default function InvoicesPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-2.5">
           <button
             suppressHydrationWarning
             onClick={() => fetchInvoices()}
@@ -482,7 +482,7 @@ export default function InvoicesPage() {
       ) : (
         <div className="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full min-w-[1050px] text-left text-xs">
               <thead className="bg-slate-100/75 text-slate-600 uppercase tracking-wider border-b border-slate-200 font-bold text-[10px]">
                 <tr>
                   <th className="py-3.5 px-4 w-36">Document #</th>

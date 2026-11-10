@@ -987,7 +987,7 @@ export default function QuotationsPage() {
       ) : (
         <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full min-w-[850px] text-left text-xs">
               <thead className="bg-slate-100/75 text-slate-600 uppercase tracking-wider border-b border-slate-200 font-bold text-[10px]">
                 <tr>
                   <th className="py-3.5 px-4 w-36">Quote # & Revisions</th>

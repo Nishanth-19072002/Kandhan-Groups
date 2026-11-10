@@ -107,7 +107,7 @@ export default function GstReconciliationPage() {
         </div>
 
         {/* Date Selector & CA Export Button */}
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-3">
           <div className="flex items-center gap-2 bg-white border border-slate-200 shadow-xs p-1.5 rounded-xl text-xs">
             <Calendar className="w-4 h-4 text-amber-500 ml-1.5" />
             <select suppressHydrationWarning
@@ -290,7 +290,7 @@ export default function GstReconciliationPage() {
             <div className="bg-white border border-slate-200 shadow-xs rounded-2xl p-6 space-y-4">
               <h2 className="text-base font-extrabold text-slate-900">GSTR-3B Tax Computation Summary Table</h2>
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs border border-slate-200 rounded-xl">
+                <table className="w-full min-w-[650px] text-left text-xs border border-slate-200 rounded-xl">
                   <thead className="bg-slate-100/75 text-slate-600 uppercase tracking-wider border-b border-slate-200">
                     <tr>
                       <th className="py-3 px-4 font-bold">Tax Head</th>
@@ -343,7 +343,7 @@ export default function GstReconciliationPage() {
                 <div className="text-center py-12 text-slate-500 text-xs">No sales invoices issued in this month.</div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs">
+                  <table className="w-full min-w-[700px] text-left text-xs">
                     <thead className="border-b border-slate-200 text-slate-600 uppercase tracking-wider font-bold text-[10px] bg-slate-50/80">
                       <tr>
                         <th className="py-3 px-3 font-bold">Invoice No</th>
@@ -382,7 +382,7 @@ export default function GstReconciliationPage() {
                 <div className="text-center py-12 text-slate-500 text-xs">No purchase bills uploaded for this month.</div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs">
+                  <table className="w-full min-w-[700px] text-left text-xs">
                     <thead className="border-b border-slate-200 text-slate-600 uppercase tracking-wider font-bold text-[10px] bg-slate-50/80">
                       <tr>
                         <th className="py-3 px-3 font-bold">Supplier Name</th>

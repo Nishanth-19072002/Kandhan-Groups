@@ -40,9 +40,9 @@ export default function PMCDeliveryEngine() {
             </div>
 
             {/* Arrow */}
-            <div className="hidden lg:flex flex-col items-center text-gold">
-              <span className="font-mono text-[10px] tracking-widest text-gold uppercase">1 Contract</span>
-              <Icon name="arrow" className="h-5 w-5" />
+            <div className="flex lg:flex-col items-center justify-center text-gold py-1 lg:py-0">
+              <span className="font-mono text-[10px] tracking-widest text-gold uppercase mr-2 lg:mr-0">1 Contract</span>
+              <Icon name="arrow" className="h-4 w-4 rotate-90 lg:rotate-0" />
             </div>
 
             {/* Kandhan Groups Core */}
@@ -64,9 +64,9 @@ export default function PMCDeliveryEngine() {
             </div>
 
             {/* Arrow */}
-            <div className="hidden lg:flex flex-col items-center text-cyan-bp">
-              <span className="font-mono text-[10px] tracking-widest text-cyan-bp uppercase">We Outsource</span>
-              <Icon name="arrow" className="h-5 w-5" />
+            <div className="flex lg:flex-col items-center justify-center text-cyan-bp py-1 lg:py-0">
+              <span className="font-mono text-[10px] tracking-widest text-cyan-bp uppercase mr-2 lg:mr-0">We Outsource</span>
+              <Icon name="arrow" className="h-4 w-4 rotate-90 lg:rotate-0" />
             </div>
 
             {/* Subcontractors */}

@@ -37,9 +37,9 @@ export default function Hero({ started }: { started: boolean }) {
       <div className="pointer-events-none absolute -right-40 -top-40 h-[620px] w-[620px] rounded-full bg-gold/15 blur-[140px]" />
       <div className="pointer-events-none absolute -bottom-40 -left-40 h-[520px] w-[520px] rounded-full bg-cyan-bp/10 blur-[140px]" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-6 px-5 sm:px-8 lg:min-h-[calc(100svh-6rem)] lg:grid-cols-[1.05fr_1fr]">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-6 px-4 sm:px-8 lg:min-h-[calc(100svh-6rem)] lg:grid-cols-[1.05fr_1fr] overflow-hidden">
         {/* LEFT — copy */}
-        <div className="relative z-10">
+        <div className="relative z-10 w-full min-w-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={started ? { opacity: 1, y: 0 } : {}}
@@ -50,14 +50,17 @@ export default function Hero({ started }: { started: boolean }) {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
             </span>
-            <span className="truncate sm:whitespace-normal">
+            <span className="sm:hidden font-medium">
+              Civil Works · Turnkey Homes · PMC
+            </span>
+            <span className="hidden sm:inline">
               Civil Contracts · Turnkey Homes · Architecture · Trade Contracts · Smart Automation
             </span>
           </motion.div>
 
-          <h1 className="mt-5 sm:mt-6 font-display text-[2.25rem] sm:text-6xl xl:text-7xl font-extrabold leading-[1.08] sm:leading-[1.02] tracking-tight text-white">
+          <h1 className="mt-4 sm:mt-6 font-display text-[1.95rem] min-[400px]:text-4xl sm:text-6xl xl:text-7xl font-extrabold leading-[1.1] sm:leading-[1.02] tracking-tight text-white break-words">
             {["Building Tomorrow.", "Managing Everything."].map((line, i) => (
-              <span key={line} className="block overflow-hidden pb-1">
+              <span key={line} className="block pb-1">
                 <motion.span
                   className={`block ${i === 1 ? "text-gradient-gold" : ""}`}
                   initial={{ y: "110%" }}
@@ -74,9 +77,9 @@ export default function Hero({ started }: { started: boolean }) {
             initial={{ opacity: 0, y: 20 }}
             animate={started ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.5, ease }}
-            className="mt-5 sm:mt-6 max-w-xl text-sm leading-relaxed text-slate-400 sm:text-lg"
+            className="mt-4 sm:mt-6 max-w-xl text-sm leading-relaxed text-slate-300 sm:text-lg"
           >
-            From <span className="text-slate-200">company civil contracts</span> and <span className="text-slate-200">individual homes</span> to excavation, architectural planning, and smart home automation — {siteConfig.name} delivers everything from scratch to handover. You get one partner, one timeline, and one single bill.
+            From <span className="text-white font-medium">company civil contracts</span> and <span className="text-white font-medium">individual homes</span> to excavation, architectural planning, and smart home automation — {siteConfig.name} delivers everything from scratch to handover. You get one partner, one timeline, and one single bill.
           </motion.p>
 
           <motion.div
@@ -87,14 +90,14 @@ export default function Hero({ started }: { started: boolean }) {
           >
             <button suppressHydrationWarning
               onClick={() => openEnquiry()}
-              className="shine group flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold to-amber-deep px-7 py-3.5 font-semibold text-ink glow-gold transition hover:brightness-110 w-full sm:w-auto"
+              className="shine group flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold to-amber-deep px-7 py-3.5 font-semibold text-ink glow-gold transition hover:brightness-110 w-full sm:w-auto cursor-pointer"
             >
               Get a Free Quote
               <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" strokeWidth={2.2} />
             </button>
             <button suppressHydrationWarning
               onClick={() => scrollToId("services")}
-              className="flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 font-semibold text-white backdrop-blur transition hover:border-gold/50 hover:bg-white/10 w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 font-semibold text-white backdrop-blur transition hover:border-gold/50 hover:bg-white/10 w-full sm:w-auto cursor-pointer"
             >
               Explore Services
             </button>
@@ -123,7 +126,7 @@ export default function Hero({ started }: { started: boolean }) {
         </div>
 
         {/* RIGHT — 3D + guide */}
-        <div className="relative h-[460px] sm:h-[540px] lg:h-[640px]">
+        <div className="relative h-[360px] sm:h-[480px] lg:h-[640px] w-full overflow-hidden rounded-2xl">
           <div className="absolute inset-0">{started && <WireframeTower />}</div>
 
           {/* HUD corner labels */}
@@ -131,7 +134,7 @@ export default function Hero({ started }: { started: boolean }) {
             initial={{ opacity: 0 }}
             animate={started ? { opacity: 1 } : {}}
             transition={{ delay: 1.5 }}
-            className="pointer-events-none absolute right-2 top-6 hidden font-mono text-[10px] leading-relaxed text-cyan-bp/70 sm:block"
+            className="pointer-events-none absolute right-2 top-4 hidden font-mono text-[10px] leading-relaxed text-cyan-bp/70 sm:block"
           >
             <div>SYS://KANDHAN.BUILD</div>
             <div>STATUS: <span className="text-gold">CONSTRUCTING</span></div>
@@ -140,10 +143,10 @@ export default function Hero({ started }: { started: boolean }) {
 
           {/* guide */}
           <motion.div
-            className="absolute bottom-0 left-0 z-20 w-[160px] sm:w-[190px] lg:w-[220px]"
-            initial={{ x: "260%" }}
+            className="absolute bottom-0 left-6 sm:left-12 lg:left-0 z-20 w-[140px] sm:w-[190px] lg:w-[220px]"
+            initial={{ x: "120%" }}
             animate={started ? { x: "0%" } : {}}
-            transition={{ duration: 2.6, ease: "linear" }}
+            transition={{ duration: 2.2, ease: "linear" }}
             onAnimationComplete={() => started && !arrived && setArrived(true)}
           >
             <AnimatePresence>
@@ -153,9 +156,9 @@ export default function Hero({ started }: { started: boolean }) {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                  className="absolute -top-28 left-1/2 z-30 w-[240px] -translate-x-1/2 sm:-top-24 sm:w-[270px]"
+                  className="absolute -top-28 left-0 sm:left-1/2 z-30 w-[230px] sm:-translate-x-1/2 sm:-top-24 sm:w-[270px] max-w-[calc(100vw-3rem)]"
                 >
-                  <div className="relative rounded-2xl border border-gold/40 bg-panel/95 px-4 py-3 text-sm font-medium text-white shadow-2xl shadow-black/80 backdrop-blur-xl">
+                  <div className="relative rounded-2xl border border-gold/40 bg-panel/95 px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm font-medium text-white shadow-2xl shadow-black/80 backdrop-blur-xl">
                     <Typewriter
                       lines={[
                         "Hey there! 👋",
@@ -165,7 +168,7 @@ export default function Hero({ started }: { started: boolean }) {
                       ]}
                       onDone={onSpeechDone}
                     />
-                    <div className="absolute -bottom-2 left-1/2 h-0 w-0 -translate-x-1/2 border-x-8 border-x-transparent border-t-8 border-t-panel" />
+                    <div className="absolute -bottom-2 left-8 sm:left-1/2 h-0 w-0 sm:-translate-x-1/2 border-x-8 border-x-transparent border-t-8 border-t-panel" />
                   </div>
                 </motion.div>
               )}

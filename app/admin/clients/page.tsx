@@ -244,7 +244,7 @@ export default function ClientsPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-2.5">
           <button
             suppressHydrationWarning
             onClick={() => fetchClients()}
@@ -299,7 +299,7 @@ export default function ClientsPage() {
       ) : (
         <div className="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full min-w-[850px] text-left text-xs">
               <thead className="bg-slate-50/80 text-slate-600 uppercase tracking-wider border-b border-slate-200 font-bold text-[10px]">
                 <tr>
                   <th className="py-3.5 px-4">Client Name & Company</th>
@@ -496,7 +496,7 @@ export default function ClientsPage() {
                 </div>
 
                 {/* Sub-Tabs Navigation */}
-                <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
+                <div className="flex items-center gap-2 border-b border-slate-200 pb-2 overflow-x-auto scrollbar-none">
                   {[
                     { id: "overview", label: "Overview & Addresses" },
                     { id: "enquiries", label: `Enquiries (${selectedClientProfile.enquiries.length})` },
@@ -508,7 +508,7 @@ export default function ClientsPage() {
                       suppressHydrationWarning
                       key={t.id}
                       onClick={() => setActiveProfileTab(t.id as any)}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition ${
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition shrink-0 cursor-pointer ${
                         activeProfileTab === t.id
                           ? "bg-slate-900 text-white shadow-xs"
                           : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
