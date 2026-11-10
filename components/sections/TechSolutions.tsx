@@ -20,27 +20,27 @@ const cards: {
     title: "Designs & 3D elevations planned from scratch.",
     image: "/images/architecture.jpg",
     icon: "compass",
-    desc: "Walk through your dream building before laying a single brick. We provide complete architectural planning, photorealistic 3D elevations, structural blueprints, and Vastu-compliant layouts.",
+    desc: "Walk through your dream building before laying a single brick. We provide complete architectural planning, photorealistic 3D elevations, structural blueprints, and space-optimized functional layouts.",
     points: [
       "Architectural 2D floor plans & site layouts",
       "Photorealistic 3D elevations & walkthroughs",
       "Structural engineering & working drawings",
-      "Vastu-aware designs & space optimization",
+      "Modern space planning & aesthetic concepts",
     ],
     work: "Architectural Planning & 3D Design",
     accent: "gold",
   },
   {
-    tag: "Software & Smart Home Automation",
-    title: "Software solutions & home automation control for you.",
+    tag: "Software, Smart Home & STP Automation",
+    title: "Software solutions for all your business needs & automation.",
     image: "/images/software.jpg",
     icon: "code",
-    desc: "We build custom software solutions and integrate intelligent home automation systems. Control your lighting, appliances, smart switches, and project tracking easily right from your phone.",
+    desc: "We provide custom software solutions tailored for all your business needs, integrated with smart home controls, small-scale industrial automation, and fully automated Sewage Treatment Plant (STP) solutions.",
     points: [
-      "Smart home automation & IoT mobile controls",
-      "Automated lighting & smart appliance controls",
-      "Custom business software & web portals",
-      "Client project tracking & digital dashboards",
+      "Software solutions for all your business needs",
+      "Smart home automation & mobile app controls",
+      "Small-scale industrial automation systems",
+      "Fully automated STP (Sewage Treatment Plant) solutions",
     ],
     work: "Software Solutions & Smart Home Automation",
     accent: "cyan",
@@ -54,8 +54,8 @@ export default function TechSolutions() {
         <SectionHeading
           eyebrow="Beyond Bricks"
           title="Architecture, Software &"
-          highlight="Home Automation."
-          subtitle="Architectural blueprint design combined with modern software solutions and smart home automation control for you."
+          highlight="Automation Systems."
+          subtitle="Modern architectural blueprint design combined with software solutions for all your business needs, smart home automation, and fully automated STP solutions."
         />
 
         <div className="mt-14 grid gap-6 lg:grid-cols-2">

@@ -4,7 +4,7 @@ export const services: { icon: IconName; title: string; desc: string; workType?:
   {
     icon: "factory",
     title: "Civil Works in Companies & Factories",
-    desc: "In-plant civil contracts, equipment foundation pads, flooring, partitions, and internal civil modifications.",
+    desc: "In-plant civil construction inside running companies: building work, painting, plumbing, electrical installations, excavation, and structural alterations.",
     workType: "Civil Work Contracts Inside Companies & Factories",
   },
   {
@@ -34,13 +34,13 @@ export const services: { icon: IconName; title: string; desc: string; workType?:
   {
     icon: "compass",
     title: "Architectural Planning & 3D Design",
-    desc: "2D floor plans, photorealistic 3D elevations, structural blueprints, and Vastu-compliant layouts engineered to precision.",
+    desc: "2D floor plans, photorealistic 3D elevations, structural blueprints, and space-optimized modern layouts engineered to precision.",
     workType: "Architectural Planning & 3D Design",
   },
   {
     icon: "code",
-    title: "Software & Home Automation Control",
-    desc: "Smart home automation systems to control lighting, appliances, and custom software solutions for your operations.",
+    title: "Software, Smart Home & STP Automation",
+    desc: "Software solutions for all your business needs, smart home automation, small-scale industrial automation, and fully automated STP solutions.",
     workType: "Software Solutions & Smart Home Automation",
   },
   {
@@ -58,7 +58,7 @@ export const services: { icon: IconName; title: string; desc: string; workType?:
   {
     icon: "clipboard",
     title: "Turnkey Project Management (PMC)",
-    desc: "We take your project, manage all contractors, supervise quality, and execute from scratch to finishing — one point of contact, one bill.",
+    desc: "We take your project, manage all contractors, supervise quality, and execute from scratch to finishing — dedicated single-window management.",
     workType: "Turnkey Project Management (Scratch to Finishing)",
   },
 ];
@@ -82,8 +82,8 @@ export const specializations: Specialization[] = [
     image: "/images/industrial.jpg",
     title: "Civil Works in Companies & Factories",
     description:
-      "We execute internal civil work contracts inside operating companies and factories with tight schedules and quality execution. Covering civil alterations, flooring, partitions, and plant facility upgrades.",
-    scope: ["Company & factory civil contracts", "VDF & epoxy flooring", "Equipment foundation pads", "Internal partitions & compound walls", "Civil modifications & renovations"],
+      "We execute civil construction, modifications, and maintenance contracts inside operating companies and factories. Covering building works, internal partitions, plant painting, plumbing, electrical installations, and site excavations.",
+    scope: ["Civil works inside factories & companies", "Building expansions & partitions", "Plant painting & plumbing contracts", "Electrical networking & installations", "Excavation & civil modifications"],
     outcomes: ["Minimal disruption to operations", "Clean and timely execution", "Quality checks at every stage"],
   },
   {
@@ -94,7 +94,7 @@ export const specializations: Specialization[] = [
     title: "Homes Built Around Your Life",
     description:
       "Your home is your biggest investment and your most personal one. We guide you from plan approval to the housewarming. You get transparent costs, quality materials and weekly progress updates, so you never have to chase anyone.",
-    scope: ["Independent houses & villas", "Duplex & G+N buildings", "Vastu-aligned planning", "Structural & civil works", "Elevation & façade design", "Turnkey handover"],
+    scope: ["Independent houses & villas", "Duplex & G+N buildings", "Modern architectural planning", "Structural & civil works", "Elevation & façade design", "Turnkey handover"],
     outcomes: ["Fixed, itemised estimates", "Branded, verified materials", "Photo & video progress updates"],
   },
   {
@@ -126,9 +126,9 @@ export const specializations: Specialization[] = [
     image: "/images/pmc.jpg",
     title: "Project Management Consultancy",
     description:
-      "Have a project but no time to manage ten contractors? Hand it to us. We take full ownership: planning, contractor selection, procurement, supervision, quality, safety and billing. Our specialist partners do the work under our management, and you deal only with us.",
-    scope: ["Project planning & scheduling", "Contractor sourcing & vetting", "Procurement & cost control", "Site supervision & QA/QC", "Safety & compliance", "Single consolidated billing"],
-    outcomes: ["One contract, one invoice", "Full accountability with us", "Real-time progress reporting"],
+      "Have a project but no time to manage ten contractors? Hand it to us. We take full ownership: planning, contractor selection, procurement, supervision, quality, safety and delivery. Our specialist partners do the work under our management, and you deal only with us.",
+    scope: ["Project planning & scheduling", "Contractor sourcing & vetting", "Procurement & cost control", "Site supervision & QA/QC", "Safety & compliance", "Complete turnkey delivery"],
+    outcomes: ["One contract, full peace of mind", "Full accountability with us", "Real-time progress reporting"],
   },
 ];
 
@@ -147,6 +147,6 @@ export const promises: { icon: IconName; title: string; desc: string }[] = [
   { icon: "calendar", title: "Committed Timelines", desc: "Realistic schedules, shared upfront and tracked every week, with no endless delays." },
   { icon: "shield", title: "Quality You Can Verify", desc: "Branded materials, stage-wise inspections and photo reports you can check yourself." },
   { icon: "hardhat", title: "Safety First, Always", desc: "Trained crews, PPE on every site and compliance with safety norms. No shortcuts." },
-  { icon: "layers", title: "Single Consolidated Bill", desc: "Multiple trades, one invoice. We manage the vendors and you manage nothing." },
+  { icon: "layers", title: "Complete Turnkey Delivery", desc: "Multiple trades, single-window execution. We manage all contractors and handover a finished site." },
 ];
 

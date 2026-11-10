@@ -12,7 +12,7 @@ const partners: { icon: IconName; label: string }[] = [
   { icon: "factory", label: "Fabrication & PEB" },
 ];
 
-const roles = ["Plan", "Source", "Supervise", "Quality", "Bill"];
+const roles = ["Plan", "Source", "Supervise", "Quality", "Deliver"];
 
 const without = [
   "Coordinate 5–10 contractors yourself",
@@ -21,8 +21,8 @@ const without = [
   "No single party accountable for quality",
 ];
 const withUs = [
-  "One contract, one point of contact",
-  "One consolidated invoice from us",
+  "One contract, single-window contact",
+  "Transparent milestone-based progress",
   "Integrated schedule across all trades",
   "We own quality, safety & delivery",
 ];
@@ -44,7 +44,7 @@ export default function PMCModel() {
           eyebrow="Project Management Consultancy"
           title="You hand it over."
           highlight="We handle everything."
-          subtitle="Our PMC model lets you outsource an entire project to us. We bring in vetted specialist contractors, manage every detail and bill you as one company."
+          subtitle="Our PMC model lets you outsource an entire project to us. We bring in vetted specialist contractors, manage every detail, and deliver end-to-end with complete peace of mind."
         />
 
         {/* diagram */}
@@ -121,7 +121,7 @@ export default function PMCModel() {
                 <span className="ml-auto h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
               </motion.div>
             ))}
-            <div className="pl-1 pt-1 text-xs text-slate-500">Vetted specialist partners · managed &amp; billed by us</div>
+            <div className="pl-1 pt-1 text-xs text-slate-500">Vetted specialist partners · managed &amp; delivered end-to-end by us</div>
           </div>
         </div>
 

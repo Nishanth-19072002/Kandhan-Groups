@@ -79,7 +79,7 @@ export default function Hero({ started }: { started: boolean }) {
             transition={{ duration: 0.8, delay: 0.5, ease }}
             className="mt-4 sm:mt-6 max-w-xl text-sm leading-relaxed text-slate-300 sm:text-lg"
           >
-            From <span className="text-white font-medium">company civil contracts</span> and <span className="text-white font-medium">individual homes</span> to excavation, architectural planning, and smart home automation — {siteConfig.name} delivers everything from scratch to handover. You get one partner, one timeline, and one single bill.
+            From <span className="text-white font-medium">company civil contracts</span> and <span className="text-white font-medium">individual homes</span> to excavation, architectural planning, and smart home automation — {siteConfig.name} delivers everything from scratch to handover. You get a dedicated engineering partner, guaranteed quality, and seamless turnkey execution.
           </motion.p>
 
           <motion.div
@@ -110,8 +110,8 @@ export default function Hero({ started }: { started: boolean }) {
             className="mt-8 sm:mt-10 grid max-w-xl grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3"
           >
             {[
-              { icon: "user" as const, t: "One Point", s: "of Contact" },
-              { icon: "layers" as const, t: "One Single", s: "Consolidated Bill" },
+              { icon: "user" as const, t: "Single Window", s: "Direct Management" },
+              { icon: "layers" as const, t: "Turnkey", s: "Project Execution" },
               { icon: "shield" as const, t: "End-to-End", s: "Accountability" },
             ].map((b) => (
               <div key={b.t} className="glass rounded-2xl p-3 sm:p-4 flex sm:block items-center gap-3 sm:gap-0">

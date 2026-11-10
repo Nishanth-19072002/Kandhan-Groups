@@ -7,8 +7,8 @@ import { KMark, openEnquiry } from "@/components/ui/brand";
 import { processSteps } from "@/lib/content";
 
 const pmcFeatures: { icon: IconName; title: string; desc: string }[] = [
-  { icon: "user", title: "One Point of Contact", desc: "A dedicated project manager owns every milestone on site." },
-  { icon: "layers", title: "Single Consolidated Bill", desc: "Multiple contractor trades billed under one transparent invoice." },
+  { icon: "user", title: "Single Window Point of Contact", desc: "A dedicated project manager owns every milestone on site." },
+  { icon: "layers", title: "Milestone-Based Progress", desc: "Stage-wise audits, clear deliverables, and hassle-free coordination." },
   { icon: "shield", title: "Guaranteed QA / QC", desc: "Stage-wise audits, branded materials, and structural warranties." },
 ];
 
@@ -24,7 +24,7 @@ export default function PMCDeliveryEngine() {
           eyebrow="Delivery Engine & PMC"
           title="You hand over the project."
           highlight="We manage everything."
-          subtitle="We take projects, manage, execute, finish, and handover from scratch — one contract, one consolidated invoice, and zero headache."
+          subtitle="We take projects, manage, execute, finish, and handover from scratch — single-window ownership, complete trade coordination, and zero headache."
         />
 
         {/* ────────── 1. PMC TRIANGLE FLOW BAR ────────── */}
@@ -55,7 +55,7 @@ export default function PMCDeliveryEngine() {
                 PMC &amp; Project Management Core
               </div>
               <div className="mt-3 flex flex-wrap justify-center gap-2">
-                {["Supervision", "Procurement", "Quality Audit", "Single Billing"].map((tag) => (
+                {["Supervision", "Procurement", "Quality Audit", "Turnkey Delivery"].map((tag) => (
                   <span key={tag} className="rounded-full bg-gold/15 px-2.5 py-0.5 text-[10px] font-medium text-gold-2">
                     {tag}
                   </span>

@@ -18,7 +18,7 @@ function Word({ children, progress, range }: { children: string; progress: Motio
 
 const pillars: { icon: IconName; title: string; tag: string; desc: string }[] = [
   { icon: "hardhat", title: "We Build", tag: "Construction", desc: "Industrial, commercial and residential civil works delivered by skilled crews under strict quality control." },
-  { icon: "clipboard", title: "We Manage", tag: "PMC", desc: "We own your project end-to-end: planning, contractors, supervision and billing. You stay stress-free." },
+  { icon: "clipboard", title: "We Manage", tag: "PMC", desc: "We own your project end-to-end: planning, contractors, supervision and turnkey delivery. You stay stress-free." },
   { icon: "spark", title: "We Innovate", tag: "Design & Tech", desc: "Architectural design, 3D visualisation and smart software solutions for modern projects." },
 ];
 
