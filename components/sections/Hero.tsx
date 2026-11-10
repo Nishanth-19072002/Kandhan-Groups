@@ -51,10 +51,10 @@ export default function Hero({ started }: { started: boolean }) {
               <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
             </span>
             <span className="sm:hidden font-medium">
-              Civil Works · Turnkey Homes · PMC
+              Residential · Industrial Civil · PMC &amp; Turnkey
             </span>
-            <span className="hidden sm:inline">
-              Civil Contracts · Turnkey Homes · Architecture · Trade Contracts · Smart Automation
+            <span className="hidden sm:inline font-medium">
+              Residential Construction · Industrial Civil Works · PMC &amp; Project Execution · Architecture &amp; Design · Civil Contracts · Software Solutions &amp; Automation
             </span>
           </motion.div>
 
@@ -126,7 +126,7 @@ export default function Hero({ started }: { started: boolean }) {
         </div>
 
         {/* RIGHT — 3D + guide */}
-        <div className="relative h-[360px] sm:h-[480px] lg:h-[640px] w-full overflow-hidden rounded-2xl">
+        <div className="relative h-[360px] sm:h-[480px] lg:h-[640px] w-full overflow-hidden lg:overflow-visible rounded-2xl">
           <div className="absolute inset-0">{started && <WireframeTower />}</div>
 
           {/* HUD corner labels */}
@@ -143,7 +143,7 @@ export default function Hero({ started }: { started: boolean }) {
 
           {/* guide */}
           <motion.div
-            className="absolute bottom-0 left-6 sm:left-12 lg:left-0 z-20 w-[140px] sm:w-[190px] lg:w-[220px]"
+            className="absolute bottom-0 left-6 sm:left-12 lg:left-10 z-20 w-[140px] sm:w-[190px] lg:w-[220px]"
             initial={{ x: "120%" }}
             animate={started ? { x: "0%" } : {}}
             transition={{ duration: 2.2, ease: "linear" }}
@@ -156,7 +156,7 @@ export default function Hero({ started }: { started: boolean }) {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                  className="absolute -top-28 left-0 sm:left-1/2 z-30 w-[230px] sm:-translate-x-1/2 sm:-top-24 sm:w-[270px] max-w-[calc(100vw-3rem)]"
+                  className="absolute -top-28 left-0 sm:left-2 lg:left-4 z-30 w-[240px] sm:w-[270px] lg:w-[290px] max-w-[calc(100vw-3rem)]"
                 >
                   <div className="relative rounded-2xl border border-gold/40 bg-panel/95 px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm font-medium text-white shadow-2xl shadow-black/80 backdrop-blur-xl">
                     <Typewriter
@@ -168,7 +168,7 @@ export default function Hero({ started }: { started: boolean }) {
                       ]}
                       onDone={onSpeechDone}
                     />
-                    <div className="absolute -bottom-2 left-8 sm:left-1/2 h-0 w-0 sm:-translate-x-1/2 border-x-8 border-x-transparent border-t-8 border-t-panel" />
+                    <div className="absolute -bottom-2 left-8 sm:left-12 lg:left-14 h-0 w-0 border-x-8 border-x-transparent border-t-8 border-t-panel" />
                   </div>
                 </motion.div>
               )}
