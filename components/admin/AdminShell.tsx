@@ -2,6 +2,7 @@
 
 import { ReactNode, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   HardHat,
@@ -159,10 +160,14 @@ export default function AdminShell({ user, children }: AdminShellProps) {
     <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col md:flex-row">
       {/* Mobile Top Header (Navy) */}
       <div className="md:hidden flex items-center justify-between px-4 py-3 bg-[#0B192C] text-white border-b border-slate-800 sticky top-0 z-50">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center text-slate-950 font-black shadow-sm">
-            <HardHat className="w-5 h-5" />
-          </div>
+        <div className="flex items-center gap-2.5">
+          <Image
+            src="/logo.png"
+            alt="Kandhan Groups Logo"
+            width={36}
+            height={36}
+            className="w-9 h-9 rounded-xl object-contain bg-[#070b14] ring-1 ring-amber-400/50 p-0.5 shadow-sm"
+          />
           <div>
             <div className="font-bold text-sm text-white">Kandhan Groups</div>
             <div className="text-[10px] text-amber-400 font-semibold tracking-wider uppercase">Business Suite</div>
@@ -196,9 +201,13 @@ export default function AdminShell({ user, children }: AdminShellProps) {
         {/* Brand Header */}
         <div className="p-5 border-b border-slate-800 flex items-center justify-between">
           <Link href="/admin/dashboard" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center text-slate-950 font-black shadow-md shadow-amber-500/20">
-              <HardHat className="w-6 h-6" />
-            </div>
+            <Image
+              src="/logo.png"
+              alt="Kandhan Groups Logo"
+              width={44}
+              height={44}
+              className="w-11 h-11 rounded-xl object-contain bg-[#070b14] ring-1 ring-amber-400/50 p-1 shadow-md shadow-amber-500/20"
+            />
             <div>
               <div className="font-extrabold text-sm tracking-wide text-white">Kandhan Groups</div>
               <div className="text-[10px] uppercase tracking-wider text-amber-400 font-bold">

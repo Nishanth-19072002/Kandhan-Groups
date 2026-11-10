@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 import { HardHat, Lock, Mail, ArrowRight, AlertCircle, ShieldCheck } from "lucide-react";
 
 export default function AdminLoginPage() {
@@ -53,8 +54,15 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md relative z-10">
         {/* Brand Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 shadow-lg shadow-amber-500/25 mb-4 border border-amber-300">
-            <HardHat className="w-9 h-9 text-slate-950" />
+          <div className="inline-flex items-center justify-center w-24 h-16 rounded-2xl bg-[#0B192C] shadow-lg shadow-amber-500/20 mb-4 border border-amber-400/40 p-1.5">
+            <Image
+              src="/logo.png"
+              alt="Kandhan Groups Logo"
+              width={80}
+              height={50}
+              priority
+              className="w-full h-full object-contain"
+            />
           </div>
           <h1 className="text-2xl font-black tracking-tight text-slate-900">Kandhan Groups</h1>
           <p className="text-xs uppercase tracking-widest text-amber-600 font-bold mt-1">

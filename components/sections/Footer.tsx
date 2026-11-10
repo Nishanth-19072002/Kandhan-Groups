@@ -12,7 +12,10 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <Logo />
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-slate-400">{siteConfig.description}</p>
+            <div className="mt-3 text-xs font-bold text-gold tracking-wide italic">
+              &ldquo;{siteConfig.tagline}&rdquo;
+            </div>
+            <p className="mt-3 max-w-xs text-xs sm:text-sm leading-relaxed text-slate-400">{siteConfig.description}</p>
           </div>
           <div>
             <div className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-2">Company</div>

@@ -104,13 +104,13 @@ export default function IntroLoader({ onDone }: { onDone: () => void }) {
             />
 
             {/* Official Kandhan Groups Emblem */}
-            <div className="relative h-28 w-28 sm:h-36 sm:w-36 overflow-hidden rounded-3xl border-2 border-gold/70 shadow-[0_0_50px_rgba(245,165,36,0.7)] ring-4 ring-ink/80">
+            <div className="relative h-28 w-44 sm:h-36 sm:w-56 overflow-hidden rounded-3xl border-2 border-gold/70 shadow-[0_0_50px_rgba(245,165,36,0.7)] ring-4 ring-ink/80 bg-[#070b14]">
               <Image
                 src="/logo.png"
                 alt={siteConfig.name}
                 fill
                 priority
-                className="object-cover"
+                className="object-contain p-1.5"
               />
             </div>
 
@@ -124,8 +124,8 @@ export default function IntroLoader({ onDone }: { onDone: () => void }) {
               <div className="font-display text-2xl sm:text-3xl font-extrabold tracking-[0.28em] text-white">
                 KANDHAN <span className="text-gradient-gold">GROUPS</span>
               </div>
-              <div className="mt-1 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.45em] text-cyan-bp/90">
-                Civil Works · Industrial Plants · PMC
+              <div className="mt-1 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.35em] text-cyan-bp/90">
+                Civil Works · Architecture · PMC · Software Solutions
               </div>
             </motion.div>
           </motion.div>

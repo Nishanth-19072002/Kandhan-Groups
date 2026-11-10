@@ -38,7 +38,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
         <img
           src={siteConfig.logo}
           alt={siteConfig.name}
-          className="h-11 w-11 rounded-xl object-cover ring-1 ring-gold/40 shadow-[0_0_15px_rgba(245,165,36,0.35)]"
+          className="h-10 w-14 rounded-xl object-contain bg-[#070b14]/90 p-0.5 ring-1 ring-gold/40 shadow-[0_0_15px_rgba(245,165,36,0.35)]"
         />
         {!compact && (
           <span className="leading-tight">

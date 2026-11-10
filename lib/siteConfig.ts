@@ -6,7 +6,7 @@
 export const siteConfig = {
   name: "Kandhan Groups",
   shortName: "Kandhan",
-  tagline: "Every Structure Deserves A Legacy.",
+  tagline: "Every Vision Deserves A Legacy.",
   description:
     "Kandhan Groups delivers end-to-end civil contracts inside companies & factories, individual residential homes, building excavation, architectural design, plumbing & painting contracts, software solutions, smart home & STP automation, and complete turnkey project management from scratch to finishing.",
   url: "https://kandhangroups.com",
