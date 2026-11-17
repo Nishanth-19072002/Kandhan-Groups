@@ -86,22 +86,16 @@ export default function TradeNetworkPage() {
   const [groupToDelete, setGroupToDelete] = useState<NetworkGroup | null>(null);
   const [deletingGroup, setDeletingGroup] = useState(false);
 
-  // Create Contact Modal State
+  // Create Contact Modal State (Simplified for fast data entry)
   const [createContactModalOpen, setCreateContactModalOpen] = useState(false);
   const [formGroupId, setFormGroupId] = useState("");
   const [formFirmName, setFormFirmName] = useState("");
   const [formContactPerson, setFormContactPerson] = useState("");
   const [formPhone, setFormPhone] = useState("");
-  const [formAltPhone, setFormAltPhone] = useState("");
   const [formEmail, setFormEmail] = useState("");
   const [formCity, setFormCity] = useState("Perundurai");
   const [formAreaLocality, setFormAreaLocality] = useState("");
-  const [formFullAddress, setFormFullAddress] = useState("");
-  const [formStandardRate, setFormStandardRate] = useState("");
-  const [formRateUnit, setFormRateUnit] = useState("");
-  const [formPaymentTerms, setFormPaymentTerms] = useState("");
   const [formDescription, setFormDescription] = useState("");
-  const [formRating, setFormRating] = useState(5);
   const [savingContact, setSavingContact] = useState(false);
 
   // Edit Contact Modal State
@@ -111,16 +105,10 @@ export default function TradeNetworkPage() {
   const [editFirmName, setEditFirmName] = useState("");
   const [editContactPerson, setEditContactPerson] = useState("");
   const [editPhone, setEditPhone] = useState("");
-  const [editAltPhone, setEditAltPhone] = useState("");
   const [editEmail, setEditEmail] = useState("");
   const [editCity, setEditCity] = useState("");
   const [editAreaLocality, setEditAreaLocality] = useState("");
-  const [editFullAddress, setEditFullAddress] = useState("");
-  const [editStandardRate, setEditStandardRate] = useState("");
-  const [editRateUnit, setEditRateUnit] = useState("");
-  const [editPaymentTerms, setEditPaymentTerms] = useState("");
   const [editDescription, setEditDescription] = useState("");
-  const [editRating, setEditRating] = useState(5);
   const [savingEditContact, setSavingEditContact] = useState(false);
 
   // Delete Contact Modal State
@@ -272,16 +260,11 @@ export default function TradeNetworkPage() {
           firmName: formFirmName,
           contactPerson: formContactPerson,
           phone: formPhone,
-          alternatePhone: formAltPhone,
           email: formEmail,
           city: formCity,
           areaLocality: formAreaLocality,
-          fullAddress: formFullAddress,
-          standardRate: formStandardRate,
-          rateUnit: formRateUnit,
-          paymentTerms: formPaymentTerms,
           description: formDescription,
-          rating: formRating,
+          rating: 5,
         }),
       });
 
@@ -291,13 +274,8 @@ export default function TradeNetworkPage() {
         setFormFirmName("");
         setFormContactPerson("");
         setFormPhone("");
-        setFormAltPhone("");
         setFormEmail("");
         setFormAreaLocality("");
-        setFormFullAddress("");
-        setFormStandardRate("");
-        setFormRateUnit("");
-        setFormPaymentTerms("");
         setFormDescription("");
         fetchData();
       } else {
@@ -319,16 +297,10 @@ export default function TradeNetworkPage() {
     setEditFirmName(c.firmName || "");
     setEditContactPerson(c.contactPerson);
     setEditPhone(c.phone);
-    setEditAltPhone(c.alternatePhone || "");
     setEditEmail(c.email || "");
     setEditCity(c.city);
     setEditAreaLocality(c.areaLocality || "");
-    setEditFullAddress(c.fullAddress || "");
-    setEditStandardRate(c.standardRate || "");
-    setEditRateUnit(c.rateUnit || "");
-    setEditPaymentTerms(c.paymentTerms || "");
     setEditDescription(c.description || "");
-    setEditRating(c.rating || 5);
     setEditContactModalOpen(true);
   }
 
@@ -347,16 +319,10 @@ export default function TradeNetworkPage() {
           firmName: editFirmName,
           contactPerson: editContactPerson,
           phone: editPhone,
-          alternatePhone: editAltPhone,
           email: editEmail,
           city: editCity,
           areaLocality: editAreaLocality,
-          fullAddress: editFullAddress,
-          standardRate: editStandardRate,
-          rateUnit: editRateUnit,
-          paymentTerms: editPaymentTerms,
           description: editDescription,
-          rating: editRating,
         }),
       });
 
@@ -404,7 +370,7 @@ export default function TradeNetworkPage() {
   // WhatsApp click handler
   function openWhatsApp(c: NetworkContact) {
     const cleanPhone = c.phone.replace(/\D/g, "");
-    const msg = `Hello ${c.contactPerson}${c.firmName ? ` (${c.firmName})` : ""}, this is Kandhan Groups regarding construction operations and material/rate requirements.`;
+    const msg = `Hello ${c.contactPerson}${c.firmName ? ` (${c.firmName})` : ""}, this is Kandhan Groups regarding construction operations and material/trade requirements.`;
     const url = cleanPhone
       ? `https://wa.me/91${cleanPhone.slice(-10)}?text=${encodeURIComponent(msg)}`
       : `https://wa.me/?text=${encodeURIComponent(msg)}`;
@@ -425,7 +391,6 @@ export default function TradeNetworkPage() {
       c.phone.includes(q) ||
       c.city.toLowerCase().includes(q) ||
       (c.areaLocality && c.areaLocality.toLowerCase().includes(q)) ||
-      (c.standardRate && c.standardRate.toLowerCase().includes(q)) ||
       (c.description && c.description.toLowerCase().includes(q));
 
     return matchesGroup && matchesCity && matchesSearch;
@@ -451,13 +416,14 @@ export default function TradeNetworkPage() {
           </p>
         </div>
 
+        {/* Standardized Primary Action Buttons - Same recognized brand color for effortless use */}
         <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-2.5">
           <button
             suppressHydrationWarning
             onClick={() => setCreateGroupModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-slate-300 text-slate-800 hover:bg-slate-50 text-xs font-bold transition shadow-xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition shadow-xs cursor-pointer"
           >
-            <FolderTree className="w-3.5 h-3.5 text-amber-600" /> + Add Group
+            <FolderTree className="w-4 h-4" /> + Add Group
           </button>
 
           <button
@@ -468,9 +434,9 @@ export default function TradeNetworkPage() {
               }
               setCreateContactModalOpen(true);
             }}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition shadow-md shadow-amber-500/20 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition shadow-xs cursor-pointer"
           >
-            <Plus className="w-4 h-4" /> Add Trade Contact
+            <Plus className="w-4 h-4" /> + Add Trade Contact
           </button>
         </div>
       </div>
@@ -684,37 +650,11 @@ export default function TradeNetworkPage() {
                   )}
                 </div>
 
-                {/* Rate Highlight Box */}
-                {(c.standardRate || c.paymentTerms) && (
-                  <div className="mb-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 text-xs flex items-center justify-between">
-                    <div>
-                      <span className="text-[10px] text-slate-400 uppercase font-bold block">Rate / Quote:</span>
-                      <span className="font-extrabold text-amber-800 text-sm">
-                        {c.standardRate || "Negotiable"}
-                      </span>
-                      {c.rateUnit && <span className="text-[11px] text-slate-500 ml-1">({c.rateUnit})</span>}
-                    </div>
-                    {c.paymentTerms && (
-                      <div className="text-right">
-                        <span className="text-[10px] text-slate-400 uppercase font-bold block">Terms:</span>
-                        <span className="text-[11px] font-semibold text-slate-700">{c.paymentTerms}</span>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Description & Technical Specs */}
+                {/* Description & Remarks */}
                 {c.description && (
-                  <p className="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-3">
+                  <p className="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-3 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
                     {c.description}
                   </p>
-                )}
-
-                {/* Address */}
-                {c.fullAddress && (
-                  <div className="text-[11px] text-slate-500 mb-3 truncate" title={c.fullAddress}>
-                    {c.fullAddress}
-                  </div>
                 )}
               </div>
 
@@ -724,18 +664,18 @@ export default function TradeNetworkPage() {
                   <button
                     suppressHydrationWarning
                     onClick={() => openWhatsApp(c)}
-                    className="px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold transition flex items-center gap-1 cursor-pointer"
+                    className="px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition flex items-center gap-1 cursor-pointer shadow-xs"
                     title="Send WhatsApp Message"
                   >
-                    <Share2 className="w-3.5 h-3.5 text-emerald-600" /> WhatsApp
+                    <Share2 className="w-3.5 h-3.5" /> WhatsApp
                   </button>
 
                   <a
                     href={`tel:${c.phone}`}
-                    className="px-2.5 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-800 text-xs font-bold transition flex items-center gap-1 cursor-pointer"
+                    className="px-2.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition flex items-center gap-1 cursor-pointer shadow-xs"
                     title="Direct Phone Call"
                   >
-                    <Phone className="w-3.5 h-3.5 text-blue-600" /> {c.phone}
+                    <Phone className="w-3.5 h-3.5" /> Call
                   </a>
                 </div>
 
@@ -757,7 +697,7 @@ export default function TradeNetworkPage() {
                     className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition cursor-pointer"
                     title="Edit Contact"
                   >
-                    <Edit3 className="w-3.5 h-3.5 text-blue-600" />
+                    <Edit3 className="w-3.5 h-3.5 text-amber-600" />
                   </button>
                   <button
                     suppressHydrationWarning
@@ -776,7 +716,7 @@ export default function TradeNetworkPage() {
           ))}
         </div>
       ) : (
-        /* TABLE VIEW (FOR DENSE SIDE-BY-SIDE RATE COMPARISON) */
+        /* TABLE VIEW (CLEAN DIRECTORY LIST) */
         <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-left text-xs">
@@ -784,10 +724,9 @@ export default function TradeNetworkPage() {
                 <tr>
                   <th className="py-3 px-4 w-40">Group</th>
                   <th className="py-3 px-4">Firm & Contact Person</th>
-                  <th className="py-3 px-3 w-32">City / Location</th>
+                  <th className="py-3 px-3 w-36">City / Location</th>
                   <th className="py-3 px-3 w-32">Phone</th>
-                  <th className="py-3 px-3 w-36 text-right">Standard Rate</th>
-                  <th className="py-3 px-3 w-36">Payment Terms</th>
+                  <th className="py-3 px-4">Remarks / Notes</th>
                   <th className="py-3 px-4 w-32 text-right">Actions</th>
                 </tr>
               </thead>
@@ -810,12 +749,8 @@ export default function TradeNetworkPage() {
                     <td className="py-3 px-3 font-mono text-slate-800 whitespace-nowrap">
                       {c.phone}
                     </td>
-                    <td className="py-3 px-3 text-right font-extrabold text-amber-800 whitespace-nowrap">
-                      {c.standardRate || "-"}
-                      {c.rateUnit && <div className="text-[10px] text-slate-500 font-normal">{c.rateUnit}</div>}
-                    </td>
-                    <td className="py-3 px-3 text-slate-700">
-                      {c.paymentTerms || "-"}
+                    <td className="py-3 px-4 text-slate-600">
+                      {c.description || "-"}
                     </td>
                     <td className="py-3 px-4 text-right">
                       <div className="flex items-center justify-end gap-1.5">
@@ -921,7 +856,7 @@ export default function TradeNetworkPage() {
                   suppressHydrationWarning
                   type="button"
                   onClick={() => setCreateGroupModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-900"
+                  className="px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -929,7 +864,7 @@ export default function TradeNetworkPage() {
                   suppressHydrationWarning
                   type="submit"
                   disabled={savingGroup}
-                  className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-md shadow-amber-500/20 cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-xs transition cursor-pointer disabled:opacity-50"
                 >
                   {savingGroup ? "Creating..." : "Create Group"}
                 </button>
@@ -991,7 +926,7 @@ export default function TradeNetworkPage() {
                   suppressHydrationWarning
                   type="button"
                   onClick={() => setEditGroupModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-900"
+                  className="px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -999,7 +934,7 @@ export default function TradeNetworkPage() {
                   suppressHydrationWarning
                   type="submit"
                   disabled={savingEditGroup}
-                  className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-md shadow-amber-500/20 cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-xs transition cursor-pointer disabled:opacity-50"
                 >
                   {savingEditGroup ? "Saving..." : "Save Changes"}
                 </button>
@@ -1036,7 +971,7 @@ export default function TradeNetworkPage() {
                 suppressHydrationWarning
                 type="button"
                 onClick={() => setDeleteGroupModalOpen(false)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-900"
+                className="px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer"
               >
                 Cancel
               </button>
@@ -1055,11 +990,11 @@ export default function TradeNetworkPage() {
       )}
 
       {/* ======================================================== */}
-      {/* CREATE CONTACT MODAL */}
+      {/* CREATE CONTACT MODAL (SIMPLIFIED & FAST TO ENTER) */}
       {/* ======================================================== */}
       {createContactModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs">
-          <div className="w-full max-w-2xl bg-white border border-slate-200 rounded-2xl p-6 shadow-2xl text-slate-900 max-h-[92vh] overflow-y-auto">
+          <div className="w-full max-w-lg bg-white border border-slate-200 rounded-2xl p-6 shadow-2xl text-slate-900 max-h-[92vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
               <h3 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
                 <Plus className="w-5 h-5 text-amber-500" />
@@ -1077,7 +1012,7 @@ export default function TradeNetworkPage() {
             <form onSubmit={handleCreateContact} className="space-y-4">
               {/* Group Selection */}
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1">
                   Assign to Operational Group *
                 </label>
                 <select
@@ -1127,8 +1062,8 @@ export default function TradeNetworkPage() {
                 </div>
               </div>
 
-              {/* Phone & Alt Phone */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {/* Phone & Email */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Primary Phone (WhatsApp) *
@@ -1140,27 +1075,13 @@ export default function TradeNetworkPage() {
                     value={formPhone}
                     onChange={(e) => setFormPhone(e.target.value)}
                     placeholder="e.g. 94862 33441"
-                    className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none font-medium"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Alternate Phone
-                  </label>
-                  <input
-                    suppressHydrationWarning
-                    type="text"
-                    value={formAltPhone}
-                    onChange={(e) => setFormAltPhone(e.target.value)}
-                    placeholder="Office / Yard landline"
-                    className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Email
+                    Email Address (Optional)
                   </label>
                   <input
                     suppressHydrationWarning
@@ -1192,7 +1113,7 @@ export default function TradeNetworkPage() {
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Area / Locality
+                    Area / Locality (Optional)
                   </label>
                   <input
                     suppressHydrationWarning
@@ -1205,76 +1126,16 @@ export default function TradeNetworkPage() {
                 </div>
               </div>
 
-              {/* Full Address */}
+              {/* Remarks / Notes */}
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Full Yard / Shop / Office Address
-                </label>
-                <input
-                  suppressHydrationWarning
-                  type="text"
-                  value={formFullAddress}
-                  onChange={(e) => setFormFullAddress(e.target.value)}
-                  placeholder="Street, SF number, Landmark"
-                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
-                />
-              </div>
-
-              {/* Rates & Payment Terms */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Standard Rate / Quote
-                  </label>
-                  <input
-                    suppressHydrationWarning
-                    type="text"
-                    value={formStandardRate}
-                    onChange={(e) => setFormStandardRate(e.target.value)}
-                    placeholder="e.g. ₹38 / block, ₹365 / bag"
-                    className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none font-bold"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Rate Unit
-                  </label>
-                  <input
-                    suppressHydrationWarning
-                    type="text"
-                    value={formRateUnit}
-                    onChange={(e) => setFormRateUnit(e.target.value)}
-                    placeholder="per block, per sq.ft, per ton"
-                    className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Payment Terms
-                  </label>
-                  <input
-                    suppressHydrationWarning
-                    type="text"
-                    value={formPaymentTerms}
-                    onChange={(e) => setFormPaymentTerms(e.target.value)}
-                    placeholder="e.g. 15 Days Credit, COD"
-                    className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
-                  />
-                </div>
-              </div>
-
-              {/* Description & Technical Specs */}
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Product Specs, Quality, Truck Unloading, or Remarks
+                  Remarks / Notes (Optional)
                 </label>
                 <textarea
-                  rows={3}
+                  rows={2}
                   value={formDescription}
                   onChange={(e) => setFormDescription(e.target.value)}
-                  placeholder="e.g. 8-inch and 6-inch solid blocks, compressive strength 5.0 N/mm2, min order 800 blocks for free delivery..."
+                  placeholder="e.g. Supplies 8-inch blocks, trusted mason gang leader, prompt site delivery..."
                   className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
                 />
               </div>
@@ -1284,7 +1145,7 @@ export default function TradeNetworkPage() {
                   suppressHydrationWarning
                   type="button"
                   onClick={() => setCreateContactModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-900"
+                  className="px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -1292,7 +1153,7 @@ export default function TradeNetworkPage() {
                   suppressHydrationWarning
                   type="submit"
                   disabled={savingContact}
-                  className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-md shadow-amber-500/20 cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-xs transition cursor-pointer disabled:opacity-50"
                 >
                   {savingContact ? "Saving Contact..." : "Save Trade Contact"}
                 </button>
@@ -1303,14 +1164,14 @@ export default function TradeNetworkPage() {
       )}
 
       {/* ======================================================== */}
-      {/* EDIT CONTACT MODAL */}
+      {/* EDIT CONTACT MODAL (STANDARDIZED & CLEAN) */}
       {/* ======================================================== */}
       {editContactModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs">
-          <div className="w-full max-w-2xl bg-white border border-slate-200 rounded-2xl p-6 shadow-2xl text-slate-900 max-h-[92vh] overflow-y-auto">
+          <div className="w-full max-w-lg bg-white border border-slate-200 rounded-2xl p-6 shadow-2xl text-slate-900 max-h-[92vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
               <h3 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
-                <Edit3 className="w-5 h-5 text-blue-600" />
+                <Edit3 className="w-5 h-5 text-amber-500" />
                 Edit Trade Contact
               </h3>
               <button
@@ -1324,7 +1185,7 @@ export default function TradeNetworkPage() {
 
             <form onSubmit={handleSaveEditContact} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1">
                   Operational Group *
                 </label>
                 <select
@@ -1345,7 +1206,7 @@ export default function TradeNetworkPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Firm / Business Name
+                    Firm / Business Name (Optional)
                   </label>
                   <input
                     suppressHydrationWarning
@@ -1371,10 +1232,10 @@ export default function TradeNetworkPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Primary Phone *
+                    Primary Phone (WhatsApp) *
                   </label>
                   <input
                     suppressHydrationWarning
@@ -1382,26 +1243,13 @@ export default function TradeNetworkPage() {
                     required
                     value={editPhone}
                     onChange={(e) => setEditPhone(e.target.value)}
-                    className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
+                    className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none font-medium"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Alternate Phone
-                  </label>
-                  <input
-                    suppressHydrationWarning
-                    type="text"
-                    value={editAltPhone}
-                    onChange={(e) => setEditAltPhone(e.target.value)}
-                    className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Email
+                    Email Address (Optional)
                   </label>
                   <input
                     suppressHydrationWarning
@@ -1430,7 +1278,7 @@ export default function TradeNetworkPage() {
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Area / Locality
+                    Area / Locality (Optional)
                   </label>
                   <input
                     suppressHydrationWarning
@@ -1444,64 +1292,10 @@ export default function TradeNetworkPage() {
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Full Address
-                </label>
-                <input
-                  suppressHydrationWarning
-                  type="text"
-                  value={editFullAddress}
-                  onChange={(e) => setEditFullAddress(e.target.value)}
-                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Standard Rate
-                  </label>
-                  <input
-                    suppressHydrationWarning
-                    type="text"
-                    value={editStandardRate}
-                    onChange={(e) => setEditStandardRate(e.target.value)}
-                    className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none font-bold"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Rate Unit
-                  </label>
-                  <input
-                    suppressHydrationWarning
-                    type="text"
-                    value={editRateUnit}
-                    onChange={(e) => setEditRateUnit(e.target.value)}
-                    className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Payment Terms
-                  </label>
-                  <input
-                    suppressHydrationWarning
-                    type="text"
-                    value={editPaymentTerms}
-                    onChange={(e) => setEditPaymentTerms(e.target.value)}
-                    className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Product Specs / Remarks
+                  Remarks / Notes (Optional)
                 </label>
                 <textarea
-                  rows={3}
+                  rows={2}
                   value={editDescription}
                   onChange={(e) => setEditDescription(e.target.value)}
                   className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
@@ -1513,7 +1307,7 @@ export default function TradeNetworkPage() {
                   suppressHydrationWarning
                   type="button"
                   onClick={() => setEditContactModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-900"
+                  className="px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -1521,7 +1315,7 @@ export default function TradeNetworkPage() {
                   suppressHydrationWarning
                   type="submit"
                   disabled={savingEditContact}
-                  className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-500/20 cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-xs transition cursor-pointer disabled:opacity-50"
                 >
                   {savingEditContact ? "Saving..." : "Save Changes"}
                 </button>
@@ -1607,45 +1401,20 @@ export default function TradeNetworkPage() {
             </div>
 
             <div className="space-y-4 text-xs">
-              {/* Rate & Payment Highlight */}
-              <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200/80 flex items-center justify-between">
-                <div>
-                  <span className="text-[10px] uppercase font-bold text-amber-900 block">Quoted Standard Rate</span>
-                  <span className="text-base font-black text-amber-950">
-                    {activeContactView.standardRate || "Negotiable upon scope"}
-                  </span>
-                  {activeContactView.rateUnit && (
-                    <span className="text-xs text-amber-800 ml-1">({activeContactView.rateUnit})</span>
-                  )}
-                </div>
-                {activeContactView.paymentTerms && (
-                  <div className="text-right">
-                    <span className="text-[10px] uppercase font-bold text-slate-500 block">Payment Terms</span>
-                    <span className="text-xs font-bold text-slate-800">{activeContactView.paymentTerms}</span>
-                  </div>
-                )}
-              </div>
-
               {/* Contact Information */}
               <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
                 <div className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">
-                  Contact Coordinates
+                  Contact Information
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <span className="text-slate-400 block text-[11px]">Primary Mobile:</span>
+                    <span className="text-slate-400 block text-[11px]">Primary Phone (WhatsApp):</span>
                     <a href={`tel:${activeContactView.phone}`} className="font-bold text-slate-900 hover:underline">
                       {activeContactView.phone}
                     </a>
                   </div>
-                  {activeContactView.alternatePhone && (
-                    <div>
-                      <span className="text-slate-400 block text-[11px]">Alternate / Landline:</span>
-                      <span className="font-semibold text-slate-800">{activeContactView.alternatePhone}</span>
-                    </div>
-                  )}
                   {activeContactView.email && (
-                    <div className="col-span-2">
+                    <div>
                       <span className="text-slate-400 block text-[11px]">Email Address:</span>
                       <a href={`mailto:${activeContactView.email}`} className="text-blue-600 hover:underline">
                         {activeContactView.email}
@@ -1655,26 +1424,23 @@ export default function TradeNetworkPage() {
                 </div>
               </div>
 
-              {/* Location & Yard Address */}
+              {/* Location */}
               <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
                 <div className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">
-                  Location & Yard Address
+                  Location & Operating Area
                 </div>
                 <div className="flex items-center gap-1.5 font-bold text-slate-900">
                   <MapPin className="w-3.5 h-3.5 text-amber-600" />
                   <span>{activeContactView.city}</span>
                   {activeContactView.areaLocality && <span>• {activeContactView.areaLocality}</span>}
                 </div>
-                {activeContactView.fullAddress && (
-                  <p className="text-slate-600 leading-relaxed mt-1">{activeContactView.fullAddress}</p>
-                )}
               </div>
 
-              {/* Specs & Operational Remarks */}
+              {/* Remarks / Notes */}
               {activeContactView.description && (
                 <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
                   <div className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">
-                    Product Specs / Machine / Gang Capacity
+                    Remarks / Notes / Specs
                   </div>
                   <p className="text-slate-700 leading-relaxed whitespace-pre-line">
                     {activeContactView.description}
@@ -1682,21 +1448,21 @@ export default function TradeNetworkPage() {
                 </div>
               )}
 
-              {/* Actions Footer */}
+              {/* Actions Footer - Standardized Recognizable Buttons */}
               <div className="pt-3 border-t border-slate-200 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <button
                     suppressHydrationWarning
                     onClick={() => openWhatsApp(activeContactView)}
-                    className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-xs"
+                    className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-xs"
                   >
-                    <Share2 className="w-3.5 h-3.5" /> WhatsApp Message
+                    <Share2 className="w-4 h-4" /> WhatsApp
                   </button>
                   <a
                     href={`tel:${activeContactView.phone}`}
-                    className="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-xs"
+                    className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-xs"
                   >
-                    <Phone className="w-3.5 h-3.5" /> Call Now
+                    <Phone className="w-4 h-4" /> Call Now
                   </a>
                 </div>
 
@@ -1706,9 +1472,9 @@ export default function TradeNetworkPage() {
                     setViewContactModalOpen(false);
                     openEditContact(activeContactView);
                   }}
-                  className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center gap-1.5 transition cursor-pointer"
+                  className="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-xs"
                 >
-                  <Edit3 className="w-3.5 h-3.5" /> Edit
+                  <Edit3 className="w-4 h-4" /> Edit
                 </button>
               </div>
             </div>
