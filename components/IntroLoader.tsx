@@ -28,13 +28,13 @@ export default function IntroLoader({ onDone }: { onDone: () => void }) {
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
     const start = performance.now();
-    const total = 3200;
+    const total = 1400;
     let raf = 0;
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / total);
       setProgress(Math.round(p * 100));
       if (p < 1) raf = requestAnimationFrame(tick);
-      else setTimeout(() => setOpen(true), 250);
+      else setTimeout(() => setOpen(true), 150);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
@@ -45,7 +45,7 @@ export default function IntroLoader({ onDone }: { onDone: () => void }) {
     const t = setTimeout(() => {
       document.documentElement.style.overflow = "";
       onDone();
-    }, 1200);
+    }, 550);
     return () => clearTimeout(t);
   }, [open, onDone]);
 
@@ -59,7 +59,7 @@ export default function IntroLoader({ onDone }: { onDone: () => void }) {
         <motion.div
           className="absolute inset-y-0 left-0 w-1/2 bg-ink bp-grid border-r border-gold/40 shadow-2xl z-20"
           animate={open ? { x: "-100%" } : { x: 0 }}
-          transition={{ duration: 1.1, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
         >
           {/* Subtle architectural vertical beam texture */}
           <div className="absolute right-0 top-0 bottom-0 w-2 bg-gradient-to-l from-gold/30 to-transparent" />
@@ -69,7 +69,7 @@ export default function IntroLoader({ onDone }: { onDone: () => void }) {
         <motion.div
           className="absolute inset-y-0 right-0 w-1/2 bg-ink bp-grid border-l border-gold/40 shadow-2xl z-20"
           animate={open ? { x: "100%" } : { x: 0 }}
-          transition={{ duration: 1.1, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
         >
           <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-r from-gold/30 to-transparent" />
         </motion.div>

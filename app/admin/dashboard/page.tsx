@@ -28,58 +28,63 @@ export default async function AdminDashboardPage() {
   const user = await getAuthenticatedUser();
   if (!user) redirect("/admin/login");
 
-  // Fetch quick counts from DB
-  const [enquiriesCount] = await db.select({ count: sql<number>`count(*)` }).from(enquiries);
-  const [activeProjectsCount] = await db
-    .select({ count: sql<number>`count(*)` })
-    .from(orderConfirmations)
-    .where(eq(orderConfirmations.status, "ACTIVE"));
-
-  const [quotationsCount] = await db.select({ count: sql<number>`count(*)` }).from(quotations);
-  const [confirmedQuotesCount] = await db
-    .select({ count: sql<number>`count(*)` })
-    .from(quotations)
-    .where(eq(quotations.status, "CONFIRMED"));
-
   // Financial aggregates (only for Super Admin & Accountant)
   const isFinanceUser = user.role === "SUPER_ADMIN" || user.role === "ACCOUNTANT";
 
-  const [salesTotals] = isFinanceUser
-    ? await db
-        .select({
-          totalSales: sql<number>`coalesce(sum(${salesInvoices.totalInvoiceAmount}), 0)`,
-          outputGst: sql<number>`coalesce(sum(${salesInvoices.cgstAmount} + ${salesInvoices.sgstAmount} + ${salesInvoices.igstAmount}), 0)`,
-        })
-        .from(salesInvoices)
-    : [{ totalSales: 0, outputGst: 0 }];
-
-  const [purchaseTotals] = isFinanceUser
-    ? await db
-        .select({
-          totalPurchases: sql<number>`coalesce(sum(${purchaseBills.totalBillAmount}), 0)`,
-          inputItc: sql<number>`coalesce(sum(${purchaseBills.cgstAmount} + ${purchaseBills.sgstAmount} + ${purchaseBills.igstAmount}), 0)`,
-        })
-        .from(purchaseBills)
-        .where(eq(purchaseBills.itcEligibility, "ELIGIBLE"))
-    : [{ totalPurchases: 0, inputItc: 0 }];
+  // Fetch all dashboard metrics concurrently to eliminate database waterfall latency
+  const [
+    [enquiriesCount],
+    [activeProjectsCount],
+    [quotationsCount],
+    [confirmedQuotesCount],
+    [salesTotals],
+    [purchaseTotals],
+    recentEnquiries,
+  ] = await Promise.all([
+    db.select({ count: sql<number>`count(*)` }).from(enquiries),
+    db
+      .select({ count: sql<number>`count(*)` })
+      .from(orderConfirmations)
+      .where(eq(orderConfirmations.status, "ACTIVE")),
+    db.select({ count: sql<number>`count(*)` }).from(quotations),
+    db
+      .select({ count: sql<number>`count(*)` })
+      .from(quotations)
+      .where(eq(quotations.status, "CONFIRMED")),
+    isFinanceUser
+      ? db
+          .select({
+            totalSales: sql<number>`coalesce(sum(${salesInvoices.totalInvoiceAmount}), 0)`,
+            outputGst: sql<number>`coalesce(sum(${salesInvoices.cgstAmount} + ${salesInvoices.sgstAmount} + ${salesInvoices.igstAmount}), 0)`,
+          })
+          .from(salesInvoices)
+      : Promise.resolve([{ totalSales: 0, outputGst: 0 }]),
+    isFinanceUser
+      ? db
+          .select({
+            totalPurchases: sql<number>`coalesce(sum(${purchaseBills.totalBillAmount}), 0)`,
+            inputItc: sql<number>`coalesce(sum(${purchaseBills.cgstAmount} + ${purchaseBills.sgstAmount} + ${purchaseBills.igstAmount}), 0)`,
+          })
+          .from(purchaseBills)
+          .where(eq(purchaseBills.itcEligibility, "ELIGIBLE"))
+      : Promise.resolve([{ totalPurchases: 0, inputItc: 0 }]),
+    db
+      .select({
+        id: enquiries.id,
+        workType: enquiries.workType,
+        siteLocation: enquiries.siteLocation,
+        status: enquiries.status,
+        createdAt: enquiries.createdAt,
+        clientName: clients.name,
+        clientPhone: clients.phone,
+      })
+      .from(enquiries)
+      .innerJoin(clients, eq(enquiries.clientId, clients.id))
+      .orderBy(desc(enquiries.createdAt))
+      .limit(5),
+  ]);
 
   const netGstLiability = Math.max(0, (salesTotals?.outputGst || 0) - (purchaseTotals?.inputItc || 0));
-
-  // Recent 5 Enquiries
-  const recentEnquiries = await db
-    .select({
-      id: enquiries.id,
-      workType: enquiries.workType,
-      siteLocation: enquiries.siteLocation,
-      status: enquiries.status,
-      createdAt: enquiries.createdAt,
-      clientName: clients.name,
-      clientPhone: clients.phone,
-    })
-    .from(enquiries)
-    .innerJoin(clients, eq(enquiries.clientId, clients.id))
-    .orderBy(desc(enquiries.createdAt))
-    .limit(5);
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto">

@@ -1,13 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import GuideCharacter, { type GuidePose } from "@/components/guide/GuideCharacter";
-import WireframeTower from "@/components/three/WireframeTower";
 import Typewriter from "@/components/ui/Typewriter";
 import Icon from "@/components/ui/Icon";
 import { openEnquiry } from "@/components/ui/brand";
 import { scrollToId } from "@/components/SmoothScroll";
 import { siteConfig } from "@/lib/siteConfig";
+
+const WireframeTower = dynamic(() => import("@/components/three/WireframeTower"), {
+  ssr: false,
+  loading: () => <div className="absolute inset-0" />,
+});
 
 const ease = [0.22, 1, 0.36, 1] as const;
 

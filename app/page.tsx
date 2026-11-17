@@ -14,10 +14,24 @@ import Footer from "@/components/sections/Footer";
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const done = useCallback(() => setLoaded(true), []);
+  const done = useCallback(() => {
+    setLoaded(true);
+    try {
+      sessionStorage.setItem("kg_intro_seen", "true");
+    } catch {
+      // ignore
+    }
+  }, []);
 
   useEffect(() => {
     setMounted(true);
+    try {
+      if (sessionStorage.getItem("kg_intro_seen") === "true") {
+        setLoaded(true);
+      }
+    } catch {
+      // ignore
+    }
   }, []);
 
   if (!mounted) {
