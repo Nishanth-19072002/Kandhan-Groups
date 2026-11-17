@@ -17,7 +17,7 @@ export async function PATCH(
   const { id } = await params;
 
   try {
-    const { role, isActive, password, name, phone } = await req.json();
+    const { role, isActive, password, name, phone, email, username } = await req.json();
 
     const [targetUser] = await db.select().from(users).where(eq(users.id, id));
     if (!targetUser) {
@@ -29,6 +29,16 @@ export async function PATCH(
     if (isActive !== undefined) updates.isActive = isActive;
     if (name) updates.name = name.trim();
     if (phone !== undefined) updates.phone = phone ? phone.trim() : null;
+
+    const newIdentifier = (username || email || "").trim().toLowerCase();
+    if (newIdentifier && newIdentifier !== targetUser.email) {
+      const [existing] = await db.select().from(users).where(eq(users.email, newIdentifier));
+      if (existing && existing.id !== id) {
+        return NextResponse.json({ error: "This username or email is already taken." }, { status: 400 });
+      }
+      updates.email = newIdentifier;
+    }
+
     if (password) {
       updates.passwordHash = await bcrypt.hash(password, 10);
     }

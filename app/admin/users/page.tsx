@@ -17,6 +17,7 @@ import {
   AlertCircle,
   RefreshCw,
   AlertTriangle,
+  Edit3,
 } from "lucide-react";
 
 interface UserItem {
@@ -46,6 +47,67 @@ export default function UsersManagementPage() {
     phone: "",
     role: "SITE_ENGINEER",
   });
+
+  // Edit User Modal
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [userToEdit, setUserToEdit] = useState<UserItem | null>(null);
+  const [editFormData, setEditFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    role: "SITE_ENGINEER" as "SUPER_ADMIN" | "SITE_ENGINEER" | "ACCOUNTANT",
+  });
+  const [updatingUser, setUpdatingUser] = useState(false);
+  const [editError, setEditError] = useState("");
+
+  function openEditModal(u: UserItem) {
+    setUserToEdit(u);
+    setEditFormData({
+      name: u.name,
+      email: u.email,
+      phone: u.phone || "",
+      role: u.role,
+    });
+    setEditError("");
+    setEditModalOpen(true);
+  }
+
+  async function handleSaveEditUser(e: React.FormEvent) {
+    e.preventDefault();
+    if (!userToEdit) return;
+    setUpdatingUser(true);
+    setEditError("");
+
+    try {
+      const res = await fetch(`/api/admin/users/${userToEdit.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: editFormData.name,
+          username: editFormData.email,
+          phone: editFormData.phone,
+          role: editFormData.role,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to update user");
+      }
+
+      setEditModalOpen(false);
+      setUserToEdit(null);
+      fetchUsers();
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setEditError(err.message);
+      } else {
+        setEditError("Failed to update user");
+      }
+    } finally {
+      setUpdatingUser(false);
+    }
+  }
 
   // Reset Password Modal
   const [resetModalOpen, setResetModalOpen] = useState(false);
@@ -421,9 +483,19 @@ export default function UsersManagementPage() {
                         {u.createdAt ? new Date(u.createdAt).toLocaleDateString() : "-"}
                       </td>
 
-                      {/* Actions: Reset Password, Delete */}
+                      {/* Actions: Edit, Reset Password, Delete */}
                       <td className="py-3.5 px-4 text-right">
                         <div className="flex items-center justify-end gap-1.5">
+                          {/* Edit User Details (Name, Username, Role) */}
+                          <button
+                            suppressHydrationWarning
+                            onClick={() => openEditModal(u)}
+                            className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer"
+                            title="Edit User Details / Username"
+                          >
+                            <Edit3 className="w-3.5 h-3.5 text-amber-600" />
+                          </button>
+
                           {/* Reset Password */}
                           <button
                             suppressHydrationWarning
@@ -435,7 +507,7 @@ export default function UsersManagementPage() {
                             className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition cursor-pointer"
                             title="Reset Staff Password"
                           >
-                            <KeyRound className="w-3.5 h-3.5 text-amber-400" />
+                            <KeyRound className="w-3.5 h-3.5 text-amber-500" />
                           </button>
 
                           {/* Delete Account */}
@@ -616,38 +688,38 @@ export default function UsersManagementPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 font-semibold mb-1">
-                  Login Email *
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  Username or Email *
                 </label>
                 <input
                   suppressHydrationWarning
-                  type="email"
+                  type="text"
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="e.g. anand@kandhangroups.com"
-                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                  placeholder="e.g. admin or anand@kandhangroups.com"
+                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 placeholder-slate-400 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 font-semibold mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Initial Password *
                 </label>
                 <input
                   suppressHydrationWarning
                   type="password"
                   required
-                  minLength={6}
+                  minLength={4}
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  placeholder="Min. 6 characters"
-                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                  placeholder="Min. 4 characters"
+                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 placeholder-slate-400 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 font-semibold mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Phone Number
                 </label>
                 <input
@@ -656,23 +728,23 @@ export default function UsersManagementPage() {
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   placeholder="e.g. +91 94883 44434"
-                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 placeholder-slate-400 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 font-semibold mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Assign Operational Role *
                 </label>
                 <select
                   suppressHydrationWarning
                   value={formData.role}
                   onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none focus:border-amber-400 font-semibold"
+                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none font-semibold"
                 >
+                  <option value="SUPER_ADMIN">Super Admin (Full master suite access)</option>
                   <option value="SITE_ENGINEER">Site Engineer (Field uploads & site logging)</option>
                   <option value="ACCOUNTANT">Accountant (Invoices, billing, ITC verification)</option>
-                  <option value="SUPER_ADMIN">Super Admin (Full master suite access)</option>
                 </select>
               </div>
 
@@ -681,7 +753,7 @@ export default function UsersManagementPage() {
                   suppressHydrationWarning
                   type="button"
                   onClick={() => setCreateModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-900"
+                  className="px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -689,9 +761,123 @@ export default function UsersManagementPage() {
                   suppressHydrationWarning
                   type="submit"
                   disabled={creating}
-                  className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-xs transition cursor-pointer disabled:opacity-50"
                 >
                   {creating ? "Creating..." : "Create Account"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ======================================================== */}
+      {/* EDIT USER DETAILS MODAL (CHANGE USERNAME / ROLE / PHONE) */}
+      {/* ======================================================== */}
+      {editModalOpen && userToEdit && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs">
+          <div className="w-full max-w-md bg-white border border-slate-200 rounded-2xl p-6 shadow-2xl text-slate-900">
+            <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
+              <h2 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
+                <Edit3 className="w-5 h-5 text-amber-500" />
+                Edit Staff Member
+              </h2>
+              <button
+                suppressHydrationWarning
+                onClick={() => setEditModalOpen(false)}
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-900 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {editError && (
+              <div className="p-3 mb-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
+                <span>{editError}</span>
+              </div>
+            )}
+
+            <form onSubmit={handleSaveEditUser} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  Full Name *
+                </label>
+                <input
+                  suppressHydrationWarning
+                  type="text"
+                  required
+                  value={editFormData.name}
+                  onChange={(e) => setEditFormData({ ...editFormData, name: e.target.value })}
+                  placeholder="e.g. Nishanth"
+                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  Username or Email * (Used to login)
+                </label>
+                <input
+                  suppressHydrationWarning
+                  type="text"
+                  required
+                  value={editFormData.email}
+                  onChange={(e) => setEditFormData({ ...editFormData, email: e.target.value })}
+                  placeholder="e.g. admin or nishanth or admin@kandhangroups.com"
+                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none font-medium"
+                />
+                <p className="text-[10px] text-slate-500 mt-1">
+                  You can enter a simple username like <strong className="text-slate-800">admin</strong> or an email address.
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  Phone Number
+                </label>
+                <input
+                  suppressHydrationWarning
+                  type="tel"
+                  value={editFormData.phone}
+                  onChange={(e) => setEditFormData({ ...editFormData, phone: e.target.value })}
+                  placeholder="e.g. +91 94883 44434"
+                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  Assigned Role *
+                </label>
+                <select
+                  suppressHydrationWarning
+                  value={editFormData.role}
+                  onChange={(e) => setEditFormData({ ...editFormData, role: e.target.value as any })}
+                  className="w-full px-3 py-2 bg-white border border-slate-300 text-slate-900 rounded-xl text-xs focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none font-semibold"
+                >
+                  <option value="SUPER_ADMIN">Super Admin (Full master suite access)</option>
+                  <option value="SITE_ENGINEER">Site Engineer (Field uploads & site logging)</option>
+                  <option value="ACCOUNTANT">Accountant (Invoices, billing, ITC verification)</option>
+                </select>
+              </div>
+
+              <div className="pt-3 border-t border-slate-200 flex items-center justify-end gap-3">
+                <button
+                  suppressHydrationWarning
+                  type="button"
+                  onClick={() => setEditModalOpen(false)}
+                  className="px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  suppressHydrationWarning
+                  type="submit"
+                  disabled={updatingUser}
+                  className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-xs transition cursor-pointer disabled:opacity-50"
+                >
+                  {updatingUser ? "Saving..." : "Save Changes"}
                 </button>
               </div>
             </form>

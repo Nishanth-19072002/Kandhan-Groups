@@ -157,9 +157,9 @@ export default function AdminShell({ user, children }: AdminShellProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col md:flex-row">
+    <div className="h-screen w-full overflow-hidden bg-[#0B192C] text-slate-900 flex flex-col md:flex-row">
       {/* Mobile Top Header (Navy) */}
-      <div className="md:hidden flex items-center justify-between px-4 py-3 bg-[#0B192C] text-white border-b border-slate-800 sticky top-0 z-50">
+      <div className="md:hidden flex items-center justify-between px-4 py-3 bg-[#0B192C] text-white border-b border-slate-800 shrink-0 z-50">
         <div className="flex items-center gap-2.5">
           <Image
             src="/logo.png"
@@ -176,7 +176,7 @@ export default function AdminShell({ user, children }: AdminShellProps) {
         <button
           suppressHydrationWarning
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white"
+          className="p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white cursor-pointer"
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
         >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -186,20 +186,20 @@ export default function AdminShell({ user, children }: AdminShellProps) {
       {/* Mobile Backdrop */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs z-35 md:hidden"
+          className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs z-40 md:hidden"
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         />
       )}
 
-      {/* Sidebar Navigation: Deep Corporate Navy (#0B192C / #0f172a) */}
+      {/* Sidebar Navigation: Permanent Full Height Column (Zero White Gap) */}
       <aside
-        className={`fixed md:sticky top-0 h-screen w-64 bg-[#0B192C] border-r border-slate-800 flex flex-col z-40 transition-transform duration-200 shadow-xl ${
+        className={`fixed md:static inset-y-0 left-0 h-full w-[85vw] max-w-xs md:w-64 shrink-0 bg-[#0B192C] border-r border-slate-800 flex flex-col z-50 transition-transform duration-200 shadow-2xl md:shadow-none ${
           mobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
         {/* Brand Header */}
-        <div className="p-5 border-b border-slate-800 flex items-center justify-between">
+        <div className="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between shrink-0">
           <Link href="/admin/dashboard" className="flex items-center gap-3">
             <Image
               src="/logo.png"
@@ -215,10 +215,17 @@ export default function AdminShell({ user, children }: AdminShellProps) {
               </div>
             </div>
           </Link>
+          <button
+            suppressHydrationWarning
+            onClick={() => setMobileMenuOpen(false)}
+            className="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-white"
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
 
         {/* User Card */}
-        <div className="p-3.5 mx-3 my-3 rounded-xl bg-slate-900/90 border border-slate-800">
+        <div className="p-3 mx-3 my-2.5 rounded-xl bg-slate-900/90 border border-slate-800 shrink-0">
           <div className="flex items-center justify-between mb-1">
             <span className="text-xs font-bold text-white truncate">{user.name}</span>
             <span
@@ -230,8 +237,8 @@ export default function AdminShell({ user, children }: AdminShellProps) {
           <p className="text-[11px] text-slate-400 truncate font-medium">{user.email}</p>
         </div>
 
-        {/* Navigation Links */}
-        <nav className="flex-1 px-3 py-2 space-y-1 overflow-y-auto">
+        {/* Navigation Links - min-h-0 allows proper scrolling without cutting off bottom links */}
+        <nav className="flex-1 min-h-0 px-3 py-2 space-y-1 overflow-y-auto">
           {navItems
             .filter((item) => item.visible)
             .map((item) => {
@@ -257,7 +264,7 @@ export default function AdminShell({ user, children }: AdminShellProps) {
         </nav>
 
         {/* Sidebar Footer */}
-        <div className="p-3 border-t border-slate-800 space-y-2">
+        <div className="p-3 border-t border-slate-800 space-y-2 shrink-0 bg-[#0B192C]">
           <a
             href="/"
             target="_blank"
@@ -274,7 +281,7 @@ export default function AdminShell({ user, children }: AdminShellProps) {
             suppressHydrationWarning
             onClick={handleLogout}
             disabled={loggingOut}
-            className="w-full flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-500/15 hover:text-rose-300 transition"
+            className="w-full flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-500/15 hover:text-rose-300 transition cursor-pointer"
           >
             <LogOut className="w-4 h-4" />
             <span>{loggingOut ? "Signing out..." : "Sign Out"}</span>
@@ -282,10 +289,10 @@ export default function AdminShell({ user, children }: AdminShellProps) {
         </div>
       </aside>
 
-      {/* Main Content Area (Crisp White Canvas) */}
-      <main className="flex-1 flex flex-col min-h-screen overflow-x-hidden bg-[#f8fafc]">
+      {/* Main Content Area (Independent scroll pane with clean white canvas) */}
+      <main className="flex-1 min-w-0 h-full overflow-y-auto overflow-x-hidden bg-[#f8fafc] flex flex-col">
         {/* Top Header (Clean White + Navy text + Gold badge) */}
-        <header className="hidden md:flex items-center justify-between px-8 py-4 bg-white border-b border-slate-200/90 shadow-xs sticky top-0 z-30">
+        <header className="hidden md:flex items-center justify-between px-8 py-4 bg-white border-b border-slate-200/90 shadow-xs sticky top-0 z-30 shrink-0">
           <div className="flex items-center gap-3">
             <span className="text-xs uppercase tracking-widest text-slate-600 font-bold">
               Kandhan Groups Digital Management

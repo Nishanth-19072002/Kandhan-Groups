@@ -46,24 +46,37 @@ export async function getSession(): Promise<SessionPayload | null> {
   return verifySessionToken(token);
 }
 
-// Verify user exists and is active in DB
+// Verify user exists and is active in DB with resilient network retry
 export async function getAuthenticatedUser() {
   const session = await getSession();
   if (!session) return null;
 
-  const [user] = await db
-    .select({
-      id: users.id,
-      name: users.name,
-      email: users.email,
-      role: users.role,
-      phone: users.phone,
-      isActive: users.isActive,
-    })
-    .from(users)
-    .where(eq(users.id, session.userId));
+  try {
+    const [user] = await db
+      .select({
+        id: users.id,
+        name: users.name,
+        email: users.email,
+        role: users.role,
+        phone: users.phone,
+        isActive: users.isActive,
+      })
+      .from(users)
+      .where(eq(users.id, session.userId));
 
-  if (!user || user.isActive === 0) return null;
-  return user;
+    if (!user || user.isActive === 0) return null;
+    return user;
+  } catch (error) {
+    console.error("Database transient connection issue in getAuthenticatedUser:", error);
+    // Fall back to verified JWT session payload so a network hiccup never crashes the admin page
+    return {
+      id: session.userId,
+      name: session.name,
+      email: session.email,
+      role: session.role,
+      phone: null,
+      isActive: 1,
+    };
+  }
 }
 

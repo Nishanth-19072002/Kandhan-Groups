@@ -339,7 +339,7 @@ export const auditLogs = sqliteTable("audit_logs", {
   createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
 });
 
-// 21. Business Network Groups (Group-wise Trade Directory)
+// 21. Business Network Groups (Legacy fallback)
 export const networkGroups = sqliteTable("network_groups", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
@@ -347,12 +347,23 @@ export const networkGroups = sqliteTable("network_groups", {
   createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
 });
 
-// 22. Business Network Contacts
+// 22. Civil Trade Categories & Master Items (Materials, Labor, Equipment, Services with Aliases)
+export const networkCategories = sqliteTable("network_categories", {
+  id: text("id").primaryKey(),
+  department: text("department", {
+    enum: ["MATERIALS", "TRADES_LABOR", "EQUIPMENT", "SERVICES"],
+  }).notNull().default("MATERIALS"),
+  name: text("name").notNull().unique(),
+  aliases: text("aliases"), // e.g. "jalli, blue metal, 20mm aggregate"
+  defaultUnit: text("default_unit").default("per bag"),
+  description: text("description"),
+  createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
+});
+
+// 23. Business Network Contacts
 export const networkContacts = sqliteTable("network_contacts", {
   id: text("id").primaryKey(),
-  groupId: text("group_id")
-    .notNull()
-    .references(() => networkGroups.id, { onDelete: "cascade" }),
+  groupId: text("group_id").references(() => networkGroups.id, { onDelete: "set null" }),
   firmName: text("firm_name"),
   contactPerson: text("contact_person").notNull(),
   phone: text("phone").notNull(),
@@ -371,5 +382,21 @@ export const networkContacts = sqliteTable("network_contacts", {
   isActive: integer("is_active", { mode: "boolean" }).default(true),
   createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text("updated_at").default(sql`CURRENT_TIMESTAMP`),
+});
+
+// 24. Contact Supplies Junction Table (Multi-Item Supplier Registry)
+export const contactSupplies = sqliteTable("contact_supplies", {
+  id: text("id").primaryKey(),
+  contactId: text("contact_id")
+    .notNull()
+    .references(() => networkContacts.id, { onDelete: "cascade" }),
+  categoryId: text("category_id")
+    .notNull()
+    .references(() => networkCategories.id, { onDelete: "cascade" }),
+  brandOrSpecs: text("brand_or_specs"), // e.g. "UltraTech / ACC", "JSW 550D"
+  standardRate: text("standard_rate"),
+  rateUnit: text("rate_unit"),
+  notes: text("notes"),
+  createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
 });
 

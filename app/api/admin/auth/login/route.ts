@@ -7,16 +7,31 @@ import { signSession, COOKIE_NAME } from "@/lib/auth";
 
 export async function POST(req: Request) {
   try {
-    const { email, password } = await req.json();
+    const body = await req.json();
+    const identifier = (body.username || body.email || "").trim().toLowerCase();
+    const password = body.password;
 
-    if (!email || !password) {
-      return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
+    if (!identifier || !password) {
+      return NextResponse.json({ error: "Username and password are required" }, { status: 400 });
     }
 
-    const [user] = await db.select().from(users).where(eq(users.email, email.trim().toLowerCase()));
+    // Support logging in via direct username (e.g. 'admin', 'nishanth') or full email (e.g. 'admin@kandhangroups.com')
+    const candidates = [
+      identifier,
+      identifier.includes("@") ? identifier : `${identifier}@kandhangroups.com`,
+    ];
+
+    let user = null;
+    for (const cand of candidates) {
+      const [found] = await db.select().from(users).where(eq(users.email, cand));
+      if (found) {
+        user = found;
+        break;
+      }
+    }
 
     if (!user || user.isActive === 0) {
-      return NextResponse.json({ error: "Invalid credentials or inactive account" }, { status: 401 });
+      return NextResponse.json({ error: "Invalid username or password" }, { status: 401 });
     }
 
     const isValidPassword = await bcrypt.compare(password, user.passwordHash);

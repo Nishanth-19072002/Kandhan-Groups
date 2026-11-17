@@ -3,14 +3,14 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { HardHat, Lock, Mail, ArrowRight, AlertCircle, ShieldCheck } from "lucide-react";
+import { HardHat, Lock, User, ArrowRight, AlertCircle, ShieldCheck } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const from = searchParams.get("from") || "/admin/dashboard";
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,12 +24,12 @@ export default function AdminLoginPage() {
       const res = await fetch("/api/admin/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       const data = await res.json();
       if (!res.ok) {
-        throw new Error(data.error || "Invalid email or password");
+        throw new Error(data.error || "Invalid username or password");
       }
 
       router.push(from);
@@ -95,19 +95,19 @@ export default function AdminLoginPage() {
           <form onSubmit={handleLogin} autoComplete="off" className="space-y-4">
             <div>
               <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                Staff Email Address
+                Username or Email
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   suppressHydrationWarning
-                  type="email"
-                  name="staff_email"
+                  type="text"
+                  name="staff_username"
                   required
                   autoComplete="off"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@kandhangroups.com"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="e.g. admin or name@kandhangroups.com"
                   className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition"
                 />
               </div>

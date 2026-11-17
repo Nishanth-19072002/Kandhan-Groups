@@ -40,21 +40,22 @@ export async function POST(req: Request) {
   }
 
   try {
-    const { name, email, password, phone, role } = await req.json();
+    const { name, email, username, password, phone, role } = await req.json();
+    const identifier = (username || email || "").trim().toLowerCase();
 
-    if (!name || !email || !password || !role) {
+    if (!name || !identifier || !password || !role) {
       return NextResponse.json(
-        { error: "Name, email, password, and role are required." },
+        { error: "Name, username/email, password, and role are required." },
         { status: 400 }
       );
     }
 
-    const cleanEmail = email.trim().toLowerCase();
+    const cleanEmail = identifier;
 
-    // Check if email already exists
+    // Check if username/email already exists
     const [existing] = await db.select().from(users).where(eq(users.email, cleanEmail));
     if (existing) {
-      return NextResponse.json({ error: "A user with this email already exists." }, { status: 400 });
+      return NextResponse.json({ error: "A user with this username/email already exists." }, { status: 400 });
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
